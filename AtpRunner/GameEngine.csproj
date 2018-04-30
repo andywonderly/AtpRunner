@@ -49,14 +49,19 @@
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\PlayerEntity.cs" />
     <Compile Include="MainGame.cs" />
+    <Compile Include="Physics\LevelPhysics.cs" />
+    <Compile Include="Physics\MenuPhysics.cs" />
+    <Compile Include="Physics\BasePhysics.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RenderManager\RenderComponent.cs" />
     <Compile Include="RenderManager\RenderManager.cs" />
     <Compile Include="SceneLoader\LevelFactory.cs" />
     <Compile Include="SceneLoader\Level1.cs" />
+    <Compile Include="SceneLoader\MainMenuBackground.cs" />
+    <Compile Include="SceneManager\LevelScene.cs" />
+    <Compile Include="SceneManager\Scene.cs" />
     <Compile Include="SceneManager\SceneManager.cs" />
-    <Compile Include="SceneManager\SceneNavigation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

@@ -7,14 +7,23 @@ using AtpRunner.Entities;
 using AtpRunner.Scene;
 using AtpRunner.Render;
 using AtpRunner.Components;
+using AtpRunner.Physics;
 
 namespace AtpRunner.SceneLoader
 {
-    class Level1 : LevelFactory
+    class Level1Loader : SceneLoader
     {
-        public Level1(SceneManager sceneManager) : base()
+        public override int PLAYERSTARTX { get; set; }
+
+        public override int PLAYERSTARTY { get; set; }
+
+        public Level1Loader(SceneManager sceneManager, AtpRunner.Scene.Scene scene) : base()
         {
+            PLAYERSTARTX = 0;
+            PLAYERSTARTY = 100;
+
             SceneManager = sceneManager;
+            Scene = scene;
             base.Initialize();
         }
         public override BaseEntity BuildPlayer(int startX, int startY)
@@ -32,7 +41,7 @@ namespace AtpRunner.SceneLoader
 
         public override List<BaseEntity> BuildObstacles()
         {
-            int startX = 300;
+            int startX = 1300;
             int startY = 300;
             var oscillation = 200;
 
@@ -61,12 +70,23 @@ namespace AtpRunner.SceneLoader
             }
 
             var ground = new BaseEntity(SceneManager, "Obstacle", 0, 400);
-            var groundRender = new RenderComponent(ground, "BlackDot", 100000, 10);
+            var groundRender = new RenderComponent(ground, "BlackDot", 100000, 32);
             var groundPhysics = new PhysicsComponent(ground, 100000, 10);
 
             obstacles.Add(ground);
             
             return obstacles;
+        }
+
+        private void AddPlayerEventListeners()
+        {
+            var player = Scene.GetPlayer();
+            var inputComponent = (InputComponent)player.Components.FirstOrDefault(n => n.Name == "Input");
+        }
+
+        public override BasePhysics LoadPhysics()
+        {
+            return new LevelPhysics();
         }
     }
 }

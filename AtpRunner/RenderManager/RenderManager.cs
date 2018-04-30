@@ -91,7 +91,7 @@ namespace AtpRunner.Render
                     RenderComponent component = (RenderComponent)entity.Components.FirstOrDefault(n => n.Name == "Render");
                     Texture2D texture = _sceneTextures.FirstOrDefault(n => n.Name == component.TextureName);
                     int translatedX = entity.X - camera.X;
-                    int translatedY = entity.Y - camera.Y;
+                    int translatedY = (int)entity.Y - camera.Y;
 
                     Rectangle frame = new Rectangle(translatedX, translatedY, 
                         component.Dimensions.X, component.Dimensions.Y);

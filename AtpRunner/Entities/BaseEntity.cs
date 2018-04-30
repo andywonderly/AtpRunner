@@ -17,7 +17,9 @@ namespace AtpRunner.Entities
         public string Name { get; private set; }
         public List<BaseComponent> Components { get; private set; }
         public int X { get; set; }
-        public int Y { get; set; }
+        public int PreviousX { get; set; }
+        public float Y { get; set; }
+        public float PreviousY { get; set; }
 
         // Public for performance reasons, accessors cause copies
         public Point Position = new Point(0, 0);
@@ -29,7 +31,9 @@ namespace AtpRunner.Entities
             Manager = sceneManager;
             Name = EntityName;
             X = startX;
+            PreviousX = X;
             Y = startY;
+            PreviousY = Y;
         }
 
         public void AddComponent(BaseComponent component)

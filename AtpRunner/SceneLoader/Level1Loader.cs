@@ -11,7 +11,7 @@ using AtpRunner.Physics;
 
 namespace AtpRunner.SceneLoader
 {
-    class Level1Loader : SceneLoader
+    class Level1Loader : BaseSceneLoader
     {
         public override int PLAYERSTARTX { get; set; }
 
@@ -24,6 +24,25 @@ namespace AtpRunner.SceneLoader
 
             SceneManager = sceneManager;
             Scene = scene;
+            Initialize();
+            
+        }
+
+        protected override void Initialize()
+        {
+            var player = BuildPlayer(PLAYERSTARTX, PLAYERSTARTY);
+            Scene.AddEntityToScene(player);
+
+            var obstacles = BuildObstacles();
+
+            foreach(var obstacle in obstacles)
+            {
+                Scene.AddEntityToScene(obstacle);
+            }
+
+            var physics = LoadPhysics();
+            Scene.Physics = physics;
+
             base.Initialize();
         }
         public override BaseEntity BuildPlayer(int startX, int startY)
@@ -64,7 +83,7 @@ namespace AtpRunner.SceneLoader
 
                 var renderComponent = new RenderComponent(obstacle, "GreenDot", 32, 32);
                 var physicsComponent = new PhysicsComponent(obstacle, 32, 32);
-
+                obstacle.Name = "obstacle" + i.ToString();
                 obstacles.Add(obstacle);
 
             }
@@ -86,7 +105,7 @@ namespace AtpRunner.SceneLoader
 
         public override BasePhysics LoadPhysics()
         {
-            return new LevelPhysics();
+            return new LevelPhysics(Scene);
         }
     }
 }

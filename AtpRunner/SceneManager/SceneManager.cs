@@ -16,12 +16,8 @@ namespace AtpRunner.Scene
     {
         private MainGame mainGame;
         public Scene Scene { get; set; }
-        public Point Camera { get; set; }
         public override string Name { get; set; }
-        public delegate void InGameMenuCalledEvenHandler(object sender, EventArgs e);
-        public event InGameMenuCalledEvenHandler InGameMenuCalled;
-        public delegate void GameOverEventHandler(object sender, EventArgs e);
-        public event GameOverEventHandler GameOver;
+
 
         public SceneManager(MainGame Game) : base(Game)
         {
@@ -33,13 +29,13 @@ namespace AtpRunner.Scene
 
         protected override void Initialize()
         {
-            InitialLoad();
             base.Initialize();
         }
 
         public override void LoadContent()
         {
             //Add player, obstactles, props to scene
+            LoadLevel1();
         }
 
         public override void UnloadContent()
@@ -50,11 +46,6 @@ namespace AtpRunner.Scene
         public override void Update(GameTime gameTime)
         {
             Scene.Update(gameTime);
-        }
-
-        public void InitialLoad()
-        {
-            LoadLevel1();
         }
 
         public void LoadLevel1()

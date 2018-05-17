@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AtpRunner.SceneLoader
 {
-    public abstract class SceneLoader
+    public abstract class BaseSceneLoader
     {
         // The point of LevelFactory is to be a wrapper for essentially custom methods that create level objects.
         // So you can manually create objects and add them to the scene as is done in Level1.cs, or you could
@@ -22,12 +22,12 @@ namespace AtpRunner.SceneLoader
 
         protected SceneManager SceneManager { get; set; }
         protected Scene.Scene Scene { get; set; }
-        protected SceneLoader() { }
+        protected BaseSceneLoader() { }
         public abstract BaseEntity BuildPlayer(int startX, int startY);
         public abstract List<BaseEntity> BuildObstacles();
         public abstract BasePhysics LoadPhysics();
 
-        public void Initialize()
+        protected virtual void Initialize()
         {
 
         }

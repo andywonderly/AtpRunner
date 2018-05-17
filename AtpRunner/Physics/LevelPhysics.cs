@@ -1,4 +1,5 @@
 ﻿using AtpRunner.Components;
+using AtpRunner.Entities;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -15,19 +16,59 @@ namespace AtpRunner.Physics
             Scene = scene;
         }
 
-        private bool DetectCollisions()
+        public override void Update(List<BaseEntity> entities)
         {
-            var gameOver = false;
+            BaseEntity player = Scene.GetPlayer();
+            List<BaseEntity> obstacles = Scene.GetObstacles();
+            List<BaseEntity> platforms = Scene.GetPlatforms();
+            DetectPlatformCollisions(player, platforms);
+            DetectObstacleCollisions(player, obstacles);
+        }
 
-            // Get player
-            // These Linq statements could be replaced by implementing methods
-            // such as "GetPhysics", "GetRender", etc.
-            var player = Scene.GetPlayer();
+        private void DetectPlatformCollisions(BaseEntity player, List<BaseEntity> platforms)
+        {
             var playerPhysics = (PhysicsComponent)player.Components.FirstOrDefault(n => n.Name == "Physics");
             var playerHitbox = new Rectangle(player.X, (int)player.Y, playerPhysics.Hitbox.X, playerPhysics.Hitbox.Y + 1);
 
-            // Get obstacles
-            var obstacles = Scene.GetObstacles();
+            bool movingDown = player.PreviousY < player.Y;
+            bool movingUp = player.PreviousY > player.Y;
+
+
+
+            foreach (var platform in platforms)
+            {
+                var platformPhysics = (PhysicsComponent)platform.Components.FirstOrDefault(n => n.Name == "Physics");
+                var platformHitbox = new Rectangle(platform.X, (int)platform.Y,
+                    platformPhysics.Hitbox.Y, platformPhysics.Hitbox.X);
+
+                if (playerHitbox.Intersects(platformHitbox))
+                {
+                    if(movingUp)
+                    {
+                        player.Y = platformHitbox.Bottom;
+                         
+                        // Send message to end jump and begin descent
+                    }
+                    else if(movingDown)
+                    {
+                        // If bottom of player is within a step (one speed unit, or 4 pixels)
+                        // then rest on the platform.
+
+                        if(player.Y - platformHitbox.Bottom < 5)
+                        {
+                            player.Y = platformHitbox.Top + playerHitbox.Height;
+
+                            // And send message to set player state to grounded if need be
+                        }
+                    }
+                }
+            }
+        }
+
+        private void DetectObstacleCollisions(BaseEntity player, List<BaseEntity> obstacles)
+        {
+            var playerPhysics = (PhysicsComponent)player.Components.FirstOrDefault(n => n.Name == "Physics");
+            var playerHitbox = new Rectangle(player.X, (int)player.Y, playerPhysics.Hitbox.X, playerPhysics.Hitbox.Y);
 
             bool movingDown = player.PreviousY < player.Y;
             bool movingUp = player.PreviousY > player.Y;
@@ -40,80 +81,11 @@ namespace AtpRunner.Physics
 
                 if (playerHitbox.Intersects(obstacleHitbox))
                 {
-                    // The sandwich testing has to be >= instead of >, etc. because otherwise, if the player
-                    // hitbox bottom matched the obstacle bottom and the player hitbox top matched the 
-                    // obstacle top, the player would pass cleanly through the obstacle.
-                    bool playerTopSandwiched =
-                        (obstacleHitbox.Bottom >= playerHitbox.Top && playerHitbox.Top >= obstacleHitbox.Top);
-
-                    bool playerBottomSandwiched =
-                        (obstacleHitbox.Bottom >= playerHitbox.Bottom && playerHitbox.Bottom >= obstacleHitbox.Top);
-
-                    if (playerTopSandwiched && playerBottomSandwiched)
-                    {
-                        if (movingUp)
-                        {
-                            player.Y = obstacleHitbox.Bottom;
-                        }
-                        else
-                        {
-                            player.Y = obstacleHitbox.Top + playerHitbox.Height;
-                        }
-                    }
-                    else if (playerTopSandwiched)
-                    {
-                        if (playerHitbox.Right - obstacleHitbox.Left >= obstacleHitbox.Bottom - playerHitbox.Top)
-                        {
-                            player.Y = obstacleHitbox.Bottom;
-                        }
-                        else
-                        {
-                            gameOver = true;
-                        }
-                    }
-                    else if (playerBottomSandwiched)
-                    {
-                        if (playerHitbox.Right - obstacleHitbox.Left >= playerHitbox.Bottom - obstacleHitbox.Top)
-                        {
-                            player.Y = obstacleHitbox.Top - playerHitbox.Height;
-                            OnTouchedGround();
-                        }
-                        else
-                        {
-                            gameOver = true;
-                        }
-                    }
+                    // Game over message
                 }
-                else
-                {
-                    OnIsAirborneEvent();
-                }
-
-
-            }
-
-            return gameOver;
-        }
-
-        protected virtual void OnTouchedGround()
-        {
-            if (TouchedGround != null)
-            {
-                TouchedGround(this, EventArgs.Empty);
             }
         }
 
-        protected virtual void OnIsAirborneEvent()
-        {
-            if (IsAirborneEvent != null)
-            {
-                IsAirborneEvent(this, EventArgs.Empty);
-            }
-        }
 
-        protected virtual void OnGetAirJump()
-        {
-
-        }
     }
 }

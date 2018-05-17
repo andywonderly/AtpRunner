@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AtpRunner.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,12 @@ namespace AtpRunner.Physics
     public abstract class BasePhysics
     {
         public Scene.Scene Scene { get; set; }
-        public BasePhysics(AtpRunner.Scene.Scene scene)
+        public BasePhysics(Scene.Scene scene)
+        {
+
+        }
+
+        public virtual void Update(List<BaseEntity> entities)
         {
 
         }

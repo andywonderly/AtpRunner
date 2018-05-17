@@ -1,4 +1,5 @@
 ﻿using AtpRunner.Entities;
+using AtpRunner.Menu;
 using AtpRunner.Physics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -13,49 +14,55 @@ namespace AtpRunner.Scene
     public class Scene
     {
         public KeyboardState KeyboardState;
-        BasePhysics LevelPhysics;
         protected List<BaseEntity> Entities;
-        Point Camera;
-        GameTime GameTime;
+        public Point Camera;
         bool MenuActive;
-        BasePhysics Physics;
+        public BasePhysics Physics;
+        BaseMenu Menu;
 
-        public delegate void OnTouchedGroundEventHandler(object sender, EventArgs e);
-        public event OnTouchedGroundEventHandler TouchedGround;
-        public delegate void OnGetAirJumpEventHandler(object sender, EventArgs e);
-        public event OnGetAirJumpEventHandler GotAirJump;
-        public delegate void OnMenuRequestedEventHandler(object sender, EventArgs e);
-        public event OnMenuRequestedEventHandler MenuRequested;
+        public Scene()
+        {
+            Entities = new List<BaseEntity>();
+            Camera = new Point(0, 0);
+        }
 
         public void Update(GameTime gameTime)
         {
-            GameTime = gameTime;
-            Camera = new Point(0, 0);
+            
             KeyboardState = Keyboard.GetState();
-            UpdatePhysics();
+            Camera.X += 4;
+            
+            if(KeyboardState.IsKeyDown(Keys.Escape))
+            {
+                MenuActive = true;
+            }
+
             if (!MenuActive)
             {
-                UpdateEntities();
+                UpdateEntities(gameTime);
             }
             else
             {
                 UpdateMenu();
             }
+
+            UpdatePhysics();
         }
         public void UpdatePhysics()
         {
-            Physics.Update(); // Arguments??
+            Physics.Update(Entities); // Arguments??
         }
 
         public void UpdateMenu()
         {
             Menu.Update(); // Lots of stuff needed.
         }
-        private void UpdateEntities()
+
+        private void UpdateEntities(GameTime gameTime)
         {
             foreach(BaseEntity entity in Entities)
             {
-                entity.Update(GameTime);
+                entity.Update(gameTime);
             }
         }
         public void AddEntityToScene(BaseEntity entity)
@@ -102,9 +109,16 @@ namespace AtpRunner.Scene
 
         public List<BaseEntity> GetObstacles()
         {
-            var obstacles = Entities.Where(n => n.Name == "Obstacle").ToList();
+            var obstacles = Entities.Where(n => n.Name.Contains("Obstacle")).ToList();
 
             return obstacles;
+        }
+
+        public List<BaseEntity> GetPlatforms()
+        {
+            var platforms = Entities.Where(n => n.Name.Contains("Platform")).ToList();
+
+            return platforms;
         }
 
         public virtual BaseEntity GetPlayer()

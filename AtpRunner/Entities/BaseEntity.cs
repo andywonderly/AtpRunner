@@ -14,7 +14,7 @@ namespace AtpRunner.Entities
     public class BaseEntity
     {
         public SceneManager Manager { get; private set; }
-        public string Name { get; private set; }
+        public string Name { get; set; }
         public List<BaseComponent> Components { get; private set; }
         public int X { get; set; }
         public int PreviousX { get; set; }

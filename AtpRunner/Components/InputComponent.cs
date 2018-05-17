@@ -54,37 +54,46 @@ namespace AtpRunner.Components
 
         public override void Update(GameTime gameTime)
         {
-            KeyboardState keyboardState = _parentEntity.Manager.KeyboardState;
+            KeyboardState keyboardState = _parentEntity.Manager.Scene.KeyboardState;
             _previousState = _playerState;
-
-            _parentEntity.PreviousY = _parentEntity.Y;
 
             if(keyboardState.IsKeyDown(Keys.Up))
             {
-                Jump();
+                _parentEntity.Y -= _speed;
             }
-            else if(_jumpingLastFrame == true)
+            else if(keyboardState.IsKeyDown(Keys.Down))
             {
-                EndJump();
+                _parentEntity.Y += _speed;
             }
 
-            if(_playerState == PlayerState.Grounded)
-            {
-                _velocityY = 0;
-            }
-            else
-            {
-                _velocityY += _gravity;
-                _parentEntity.PreviousY = _parentEntity.Y;
-                _parentEntity.Y += _velocityY;
-            }
+            //_parentEntity.PreviousY = _parentEntity.Y;
+
+            //if(keyboardState.IsKeyDown(Keys.Up))
+            //{
+            //    Jump();
+            //}
+            //else if(_jumpingLastFrame == true)
+            //{
+            //    EndJump();
+            //}
+
+            //if(_playerState == PlayerState.Grounded)
+            //{
+            //    _velocityY = 0;
+            //}
+            //else
+            //{
+            //    _velocityY += _gravity;
+            //    _parentEntity.PreviousY = _parentEntity.Y;
+            //    _parentEntity.Y += _velocityY;
+            //}
             _parentEntity.PreviousX = _parentEntity.X;
             _parentEntity.X += _speed;
 
-            if(_velocityY > 10)
-            {
-                _velocityY = 10f;
-            }
+            //if(_velocityY > 10)
+            //{
+            //    _velocityY = 10f;
+            //}
         }
 
 

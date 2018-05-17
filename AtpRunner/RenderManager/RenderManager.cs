@@ -49,8 +49,8 @@ namespace AtpRunner.Render
         {
             SpriteBatch = new SpriteBatch(this.GraphicsDevice);
 
-            SceneManager scene = (SceneManager)_mainGame.GetManager("Scene");
-            var entities = scene.GetEntitiesWithSprites();
+            SceneManager sceneManager = (SceneManager)_mainGame.GetManager("Scene");
+            var entities = sceneManager.Scene.GetEntitiesWithSprites();
             foreach (var entity in entities)
             {
                 RenderComponent renderComponent = (RenderComponent)entity.GetComponent("Render");
@@ -72,7 +72,7 @@ namespace AtpRunner.Render
                 throw new Exception("Scene manager not properly registered to game engine.");
             }
 
-            Point camera = sceneManager.Camera;
+            Point camera = sceneManager.Scene.Camera;
             if(camera == null)
             {
                 throw new Exception("Camera does not exist in game scene.");
@@ -80,7 +80,7 @@ namespace AtpRunner.Render
 
             this.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            List<BaseEntity> entities = sceneManager.GetEntitiesWithSprites();
+            List<BaseEntity> entities = sceneManager.Scene.GetEntitiesWithSprites();
 
             SpriteBatch.Begin();
 

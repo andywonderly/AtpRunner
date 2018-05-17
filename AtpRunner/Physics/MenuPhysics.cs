@@ -8,6 +8,9 @@ namespace AtpRunner.Physics
 {
     public class MenuPhysics : BasePhysics
     {
+        public MenuPhysics(Scene.Scene scene) :base(scene)
+        {
 
+        }
     }
 }

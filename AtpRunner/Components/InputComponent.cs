@@ -9,36 +9,55 @@ using Microsoft.Xna.Framework;
 
 namespace AtpRunner.Components
 {
+    public enum ContactState
+    {
+        Grounded,
+        Airborne,
+    }
+
+    public enum JumpState
+    {
+        CanJump,
+        CantJump,
+    }
+
     public class InputComponent : BaseComponent
     {
         private BaseEntity _parentEntity;
         private int _speed;
-        private float _velocityY;
-        private float _gravity;
-        private bool _airJump;
-        private bool _jumpingLastFrame;
-        private PlayerState _playerState;
-        private PlayerState _previousState;
+        public int VelocityY { get; private set; }
+        private int _velocityYMax;
+        private int _gravity;
 
-        private enum PlayerState
-        {
-            Grounded,
-            Airborne,
-        }
+        private ContactState _contactState;
+        private ContactState _previousContactState;
+        private JumpState _jumpState;
+        private JumpState _previousJumpState;
+
+        private KeyboardState _previousKeyboardState;
+
+        private int _jumpCounter;
+        private int _maxJump;
+        private int _minJump;
 
         public InputComponent(BaseEntity parentEntity) : base(parentEntity)
         {
             _parentEntity = parentEntity;
             Name = "Input";
             _speed = 4;
-            _velocityY = 0f;
-            _gravity = 0.5f;
-            _airJump = false;
-            _jumpingLastFrame = false;
+            _gravity = 1;
 
-            _playerState = PlayerState.Airborne;
-            _previousState = PlayerState.Airborne;
-            
+            _velocityYMax = 8;
+
+            _contactState = ContactState.Airborne;
+            _previousContactState = ContactState.Airborne;
+
+            _previousKeyboardState = Keyboard.GetState();
+
+            _jumpCounter = 0;
+            _maxJump = 10;
+            _minJump = 7;
+
             Initialize();
         }
 
@@ -54,95 +73,49 @@ namespace AtpRunner.Components
 
         public override void Update(GameTime gameTime)
         {
+            
             KeyboardState keyboardState = _parentEntity.Manager.Scene.KeyboardState;
-            _previousState = _playerState;
+            _previousContactState = _contactState;
 
-            if(keyboardState.IsKeyDown(Keys.Up))
+            if(!(_previousKeyboardState.IsKeyDown(Keys.Up) || _previousKeyboardState.IsKeyDown(Keys.Space) || 
+                _previousKeyboardState.IsKeyDown(Keys.W)) && (
+                keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.Space) || keyboardState.IsKeyDown(Keys.W)))
             {
-                _parentEntity.Y -= _speed;
+                Jump();
             }
-            else if(keyboardState.IsKeyDown(Keys.Down))
-            {
-                _parentEntity.Y += _speed;
-            }
-
-            //_parentEntity.PreviousY = _parentEntity.Y;
-
-            //if(keyboardState.IsKeyDown(Keys.Up))
-            //{
-            //    Jump();
-            //}
-            //else if(_jumpingLastFrame == true)
-            //{
-            //    EndJump();
-            //}
-
-            //if(_playerState == PlayerState.Grounded)
-            //{
-            //    _velocityY = 0;
-            //}
-            //else
-            //{
-            //    _velocityY += _gravity;
-            //    _parentEntity.PreviousY = _parentEntity.Y;
-            //    _parentEntity.Y += _velocityY;
-            //}
+            
             _parentEntity.PreviousX = _parentEntity.X;
             _parentEntity.X += _speed;
+            _parentEntity.Y += VelocityY;
 
-            //if(_velocityY > 10)
-            //{
-            //    _velocityY = 10f;
-            //}
+            VelocityY += _gravity;
+
+            if(VelocityY > _velocityYMax)
+            {
+                VelocityY = _velocityYMax;
+            }
+
+            _previousKeyboardState = keyboardState;
         }
 
-
-
-        private void OnJumpPowerup(object sender, EventArgs e)
+        public void DoubleJump()
         {
-            _airJump = true;
+            _jumpState = JumpState.CanJump;
         }
 
         private void Jump()
         {
-            if(_playerState == PlayerState.Grounded || _airJump)
+            if(_jumpState == JumpState.CanJump)
             {
-                _velocityY = -12.0f;
-                _playerState = PlayerState.Airborne;
-
-                if(_airJump)
-                {
-                    _airJump = false;
-                }
-            }
-
-            _jumpingLastFrame = true;
-        }
-
-        private void EndJump()
-        {
-            if(_velocityY < -6.0)
-            {
-                _velocityY = -6.0f;
-            }
-
-            _jumpingLastFrame = false;
-        }
-
-        public void OnTouchedGround(object sender, EventArgs e)
-        {
-            if (_playerState == PlayerState.Airborne)
-            {
-                _playerState = PlayerState.Grounded;
-                _velocityY = 0;
-                _airJump = false;
-                _jumpingLastFrame = false;
+                VelocityY = -14;
+                _jumpState = JumpState.CantJump;
             }
         }
 
-        public void OnAirborne(object sender, EventArgs e)
+        public void TouchedGround()
         {
-            _playerState = PlayerState.Airborne;
+            _contactState = ContactState.Grounded;
+            _jumpState = JumpState.CanJump;
         }
     }
 }

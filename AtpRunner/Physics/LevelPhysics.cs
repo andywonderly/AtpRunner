@@ -21,19 +21,20 @@ namespace AtpRunner.Physics
             BaseEntity player = Scene.GetPlayer();
             List<BaseEntity> obstacles = Scene.GetObstacles();
             List<BaseEntity> platforms = Scene.GetPlatforms();
-            DetectPlatformCollisions(player, platforms);
-            DetectObstacleCollisions(player, obstacles);
+            
+            bool hitPlatform = DetectPlatformCollisions(player, platforms);
+            bool hitObstacle = DetectObstacleCollisions(player, obstacles);
         }
 
-        private void DetectPlatformCollisions(BaseEntity player, List<BaseEntity> platforms)
+        private bool DetectPlatformCollisions(BaseEntity player, List<BaseEntity> platforms)
         {
+            bool collision = false;
+
             var playerPhysics = (PhysicsComponent)player.Components.FirstOrDefault(n => n.Name == "Physics");
             var playerHitbox = new Rectangle(player.X, (int)player.Y, playerPhysics.Hitbox.X, playerPhysics.Hitbox.Y + 1);
 
             bool movingDown = player.PreviousY < player.Y;
             bool movingUp = player.PreviousY > player.Y;
-
-
 
             foreach (var platform in platforms)
             {
@@ -43,6 +44,8 @@ namespace AtpRunner.Physics
 
                 if (playerHitbox.Intersects(platformHitbox))
                 {
+                    collision = true;
+
                     if(movingUp)
                     {
                         player.Y = platformHitbox.Bottom;
@@ -54,19 +57,27 @@ namespace AtpRunner.Physics
                         // If bottom of player is within a step (one speed unit, or 4 pixels)
                         // then rest on the platform.
 
-                        if(player.Y - platformHitbox.Bottom < 5)
+                        PlayerTouchedDown();
+
+                        var input = (InputComponent)player.Components.FirstOrDefault(n => n.Name == "Input");
+
+                        if(playerHitbox.Bottom - platformHitbox.Bottom < input.VelocityY + 1)
                         {
-                            player.Y = platformHitbox.Top + playerHitbox.Height;
+                            player.Y = platformHitbox.Top - playerHitbox.Height + 1;
 
                             // And send message to set player state to grounded if need be
                         }
                     }
                 }
             }
+
+            return collision;
         }
 
-        private void DetectObstacleCollisions(BaseEntity player, List<BaseEntity> obstacles)
+        private bool DetectObstacleCollisions(BaseEntity player, List<BaseEntity> obstacles)
         {
+            bool collision = false;
+
             var playerPhysics = (PhysicsComponent)player.Components.FirstOrDefault(n => n.Name == "Physics");
             var playerHitbox = new Rectangle(player.X, (int)player.Y, playerPhysics.Hitbox.X, playerPhysics.Hitbox.Y);
 
@@ -81,9 +92,32 @@ namespace AtpRunner.Physics
 
                 if (playerHitbox.Intersects(obstacleHitbox))
                 {
-                    // Game over message
+                     collision = true;
+
+                    if(obstacle.Name.Contains("DoubleJump"))
+                    {
+                        DoubleJump();
+                    }
                 }
             }
+
+            return collision;
+        }
+
+        private void PlayerTouchedDown()
+        {
+            BaseEntity player = Scene.GetPlayer();
+            InputComponent input = (InputComponent)player.Components.FirstOrDefault(n => n.Name == "Input");
+
+            input.TouchedGround();
+        }
+
+        private void DoubleJump()
+        {
+            BaseEntity player = Scene.GetPlayer();
+            InputComponent input = (InputComponent)player.Components.FirstOrDefault(n => n.Name == "Input");
+
+            input.DoubleJump();
         }
 
 

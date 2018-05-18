@@ -14,10 +14,13 @@ namespace AtpRunner.Components
         private List<BaseEntity> _obstacles;
         private BaseEntity _parentEntity;
 
+
         public PlayerPhysicsComponent(BaseEntity parentEntity) : base(parentEntity)
         {
             _obstacles = new List<BaseEntity>();
             _parentEntity = parentEntity;
+
+
             //Hitbox = new Rectangle(123123 /*placeholder*/);
         }
 

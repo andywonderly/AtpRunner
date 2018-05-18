@@ -109,7 +109,7 @@ namespace AtpRunner.Scene
 
         public List<BaseEntity> GetObstacles()
         {
-            var obstacles = Entities.Where(n => n.Name.Contains("Obstacle")).ToList();
+            var obstacles = Entities.Where(n => n.Name.Contains("Obstacle") || n.Name.Contains("DoubleJump")).ToList();
 
             return obstacles;
         }

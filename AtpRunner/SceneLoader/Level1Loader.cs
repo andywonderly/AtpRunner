@@ -68,7 +68,7 @@ namespace AtpRunner.SceneLoader
 
             for(var i = 0; i < 100; i++)
             {
-                var obstacle = new BaseEntity(SceneManager, "Obstacle", startX, startY);
+                var name = "Obstacle";
 
                 if(i % 2 == 0)
                 {
@@ -76,19 +76,21 @@ namespace AtpRunner.SceneLoader
                 }
                 else
                 {
+                    name = "DoubleJump";
                     startY += oscillation;
                 }
+
+                var obstacle = new BaseEntity(SceneManager, name + i.ToString(), startX, startY);
 
                 startX += 150;
 
                 var renderComponent = new RenderComponent(obstacle, "GreenDot", 32, 32);
                 var physicsComponent = new PhysicsComponent(obstacle, 32, 32);
-                obstacle.Name = "obstacle" + i.ToString();
                 obstacles.Add(obstacle);
 
             }
 
-            var ground = new BaseEntity(SceneManager, "Obstacle", 0, 400);
+            var ground = new BaseEntity(SceneManager, "Platform1", 0, 400);
             var groundRender = new RenderComponent(ground, "BlackDot", 100000, 32);
             var groundPhysics = new PhysicsComponent(ground, 100000, 10);
 

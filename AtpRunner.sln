@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameEngine", "AtpRunner\Gam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EngineContent", "EngineContent\EngineContent.csproj", "{63499B6F-BF42-4188-81A3-E339B0852FBA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LevelParser", "LevelParser\LevelParser.csproj", "{2AD41CF3-8035-4812-874B-527E09B2C7D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,14 @@ Global
 		{63499B6F-BF42-4188-81A3-E339B0852FBA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{63499B6F-BF42-4188-81A3-E339B0852FBA}.Release|x86.ActiveCfg = Release|Any CPU
 		{63499B6F-BF42-4188-81A3-E339B0852FBA}.Release|x86.Build.0 = Release|Any CPU
+		{2AD41CF3-8035-4812-874B-527E09B2C7D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AD41CF3-8035-4812-874B-527E09B2C7D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AD41CF3-8035-4812-874B-527E09B2C7D6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2AD41CF3-8035-4812-874B-527E09B2C7D6}.Debug|x86.Build.0 = Debug|Any CPU
+		{2AD41CF3-8035-4812-874B-527E09B2C7D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AD41CF3-8035-4812-874B-527E09B2C7D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AD41CF3-8035-4812-874B-527E09B2C7D6}.Release|x86.ActiveCfg = Release|Any CPU
+		{2AD41CF3-8035-4812-874B-527E09B2C7D6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

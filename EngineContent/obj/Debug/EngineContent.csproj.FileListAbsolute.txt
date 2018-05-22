@@ -1,0 +1,5 @@
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\EngineContent\bin\Debug\EngineContent.dll
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\EngineContent\bin\Debug\EngineContent.pdb
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\EngineContent\obj\Debug\EngineContent.csprojResolveAssemblyReference.cache
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\EngineContent\obj\Debug\EngineContent.dll
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\EngineContent\obj\Debug\EngineContent.pdb

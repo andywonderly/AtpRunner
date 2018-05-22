@@ -25,3 +25,7 @@ C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\obj\x86\
 C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\GreenDot.xnb
 C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\BlackDot.xnb
 C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\MaroonDot.xnb
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\LevelParser.dll
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\LevelParser.pdb
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Newtonsoft.Json.dll
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Newtonsoft.Json.xml

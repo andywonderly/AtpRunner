@@ -1,0 +1,7 @@
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\LevelParser\bin\Debug\LevelParser.dll
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\LevelParser\bin\Debug\LevelParser.pdb
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\LevelParser\obj\Debug\LevelParser.csprojResolveAssemblyReference.cache
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\LevelParser\obj\Debug\LevelParser.dll
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\LevelParser\obj\Debug\LevelParser.pdb
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\LevelParser\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\LevelParser\bin\Debug\Newtonsoft.Json.xml

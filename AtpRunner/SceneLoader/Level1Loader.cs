@@ -8,6 +8,7 @@ using AtpRunner.Scene;
 using AtpRunner.Render;
 using AtpRunner.Components;
 using AtpRunner.Physics;
+using static LevelParser.AtpLevelParser;
 
 namespace AtpRunner.SceneLoader
 {
@@ -20,7 +21,7 @@ namespace AtpRunner.SceneLoader
         public Level1Loader(SceneManager sceneManager, AtpRunner.Scene.Scene scene) : base()
         {
             PLAYERSTARTX = 0;
-            PLAYERSTARTY = 100;
+            PLAYERSTARTY = 800;
 
             SceneManager = sceneManager;
             Scene = scene;
@@ -33,11 +34,56 @@ namespace AtpRunner.SceneLoader
             var player = BuildPlayer(PLAYERSTARTX, PLAYERSTARTY);
             Scene.AddEntityToScene(player);
 
-            var obstacles = BuildObstacles();
+            //var obstacles = BuildObstacles();
 
+            TiledData level = Parse();
+
+            var objectLayer = level.layers.FirstOrDefault(n => n.name == "Object Layer 1");
+            var objects = objectLayer.objects;
+
+            var obstacles = objects.Where(n => n.Type == "Obstacle");
+            var platforms = objects.Where(n => n.Type == "Platform");
+            //var platforms = new List<TiledObject>();
+            var doubleJumps = objects.Where(n => n.Type == "DoubleJump");
+
+            var i = 0;
             foreach(var obstacle in obstacles)
             {
-                Scene.AddEntityToScene(obstacle);
+                var obstacleEntity = new BaseEntity(SceneManager, "Obstacle" + i.ToString(), obstacle.x, obstacle.y);
+
+                var renderComponent = new RenderComponent(obstacleEntity, "GreenDot", obstacle.width, obstacle.height);
+                var physicsComponent = new PhysicsComponent(obstacleEntity, obstacle.width, obstacle.height);
+                
+                Scene.AddEntityToScene(obstacleEntity);
+
+                i++;
+            }
+
+            i = 0;
+            foreach(var platform in platforms)
+            {
+                var platformEntity = new BaseEntity(SceneManager, "Platform" + i.ToString(), platform.x, platform.y);
+
+                var groundRender = new RenderComponent(platformEntity, "BlackDot", platform.width, platform.height);
+                var groundPhysics = new PhysicsComponent(platformEntity, platform.width, platform.height);
+
+                Scene.AddEntityToScene(platformEntity);
+
+                i++;
+            }
+
+            i = 0;
+            foreach(var doubleJump in doubleJumps)
+            {
+                var doubleJumpEntity = new BaseEntity(SceneManager, "DoubleJump" + i.ToString(), 
+                    doubleJump.x, doubleJump.y);
+
+                var renderComponent = new RenderComponent(doubleJumpEntity, "GreenDot", doubleJump.width, doubleJump.height);
+                var physicsComponent = new PhysicsComponent(doubleJumpEntity, doubleJump.width, doubleJump.height);
+
+                Scene.AddEntityToScene(doubleJumpEntity);
+
+                i++;
             }
 
             var physics = LoadPhysics();

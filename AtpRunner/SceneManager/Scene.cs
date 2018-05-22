@@ -23,7 +23,7 @@ namespace AtpRunner.Scene
         public Scene()
         {
             Entities = new List<BaseEntity>();
-            Camera = new Point(0, 0);
+            Camera = new Point(0, 480);
         }
 
         public void Update(GameTime gameTime)

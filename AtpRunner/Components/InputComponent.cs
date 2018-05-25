@@ -101,6 +101,7 @@ namespace AtpRunner.Components
         public void DoubleJump()
         {
             _jumpState = JumpState.CanJump;
+            
         }
 
         private void Jump()
@@ -109,13 +110,23 @@ namespace AtpRunner.Components
             {
                 VelocityY = -14;
                 _jumpState = JumpState.CantJump;
-            }
+            }  
         }
 
         public void TouchedGround()
         {
             _contactState = ContactState.Grounded;
             _jumpState = JumpState.CanJump;
+        }
+
+        public void FreeFall()
+        {
+            _contactState = ContactState.Airborne;
+
+            if(_previousContactState == ContactState.Grounded)
+            {
+                _jumpState = JumpState.CantJump;
+            }
         }
     }
 }

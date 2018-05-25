@@ -24,6 +24,19 @@ namespace AtpRunner.Physics
             
             bool hitPlatform = DetectPlatformCollisions(player, platforms);
             bool hitObstacle = DetectObstacleCollisions(player, obstacles);
+
+            if(!(hitPlatform || hitObstacle))
+            {
+                FreeFall();
+            }
+        }
+
+        private void FreeFall()
+        {
+            BaseEntity player = Scene.GetPlayer();
+            InputComponent input = (InputComponent)player.Components.FirstOrDefault(n => n.Name == "Input");
+
+            input.FreeFall();
         }
 
         private bool DetectPlatformCollisions(BaseEntity player, List<BaseEntity> platforms)
@@ -98,6 +111,17 @@ namespace AtpRunner.Physics
                     {
                         DoubleJump();
                     }
+
+                    // Removing the entity is a simple way to get rid of it.  I may want to change its color
+                    // or something fancy like that.  For now, I remove it because I was experiencing the following
+                    // issue:  You would intermittently be able to triple jump after contacting a double jump.  This
+                    // happened if you used your double jump while you were still in contact with the powerup because
+                    // you would continualy be awarded a double jump every frame that you're in contact with it.
+                    // So removing it prevents you from being awarded a double jump for every frame that you're
+                    // in contact with it.  Now, you'll only get a double jump once and then the powerup disappears
+                    // so you can't touch it again.
+
+                    Scene.RemoveEntityFromScene(obstacle);
                 }
             }
 

@@ -21,7 +21,7 @@ namespace AtpRunner.SceneLoader
         public Level1Loader(SceneManager sceneManager, AtpRunner.Scene.Scene scene) : base()
         {
             PLAYERSTARTX = 0;
-            PLAYERSTARTY = 800;
+            PLAYERSTARTY = 300;
 
             SceneManager = sceneManager;
             Scene = scene;
@@ -41,17 +41,17 @@ namespace AtpRunner.SceneLoader
             var objectLayer = level.layers.FirstOrDefault(n => n.name == "Object Layer 1");
             var objects = objectLayer.objects;
 
-            var obstacles = objects.Where(n => n.Type == "Obstacle");
-            var platforms = objects.Where(n => n.Type == "Platform");
+            var obstacles = objects.Where(n => n.gid == 15);
+            var platforms = objects.Where(n => n.gid == 5);
             //var platforms = new List<TiledObject>();
-            var doubleJumps = objects.Where(n => n.Type == "DoubleJump");
+            var doubleJumps = objects.Where(n => n.gid == 9);
 
             var i = 0;
             foreach(var obstacle in obstacles)
             {
                 var obstacleEntity = new BaseEntity(SceneManager, "Obstacle" + i.ToString(), obstacle.x, obstacle.y);
 
-                var renderComponent = new RenderComponent(obstacleEntity, "GreenDot", obstacle.width, obstacle.height);
+                var renderComponent = new RenderComponent(obstacleEntity, "MaroonDot", obstacle.width, obstacle.height);
                 var physicsComponent = new PhysicsComponent(obstacleEntity, obstacle.width, obstacle.height);
                 
                 Scene.AddEntityToScene(obstacleEntity);

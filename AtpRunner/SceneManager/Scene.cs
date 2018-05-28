@@ -1,5 +1,4 @@
 ﻿using AtpRunner.Entities;
-using AtpRunner.Menu;
 using AtpRunner.Physics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -8,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AtpRunner.Menu;
 
 namespace AtpRunner.Scene
 {
@@ -18,12 +18,15 @@ namespace AtpRunner.Scene
         public Point Camera;
         bool MenuActive;
         public BasePhysics Physics;
-        BaseMenu Menu;
+        public Menu.Menu Menu;
+        public SceneManager SceneManager;
 
-        public Scene()
+        public Scene(SceneManager sceneManager)
         {
             Entities = new List<BaseEntity>();
             Camera = new Point(-40, 180);
+            Menu = new MainMenu(this);
+            SceneManager = sceneManager;
         }
 
         public void Update(GameTime gameTime)
@@ -32,7 +35,12 @@ namespace AtpRunner.Scene
             KeyboardState = Keyboard.GetState();
             Camera.X += 4;
             
-            if(KeyboardState.IsKeyDown(Keys.Escape))
+            if(KeyboardState.IsKeyDown(Keys.Escape) && MenuActive == true)
+            {
+                MenuActive = false;
+                Menu.End();
+            }
+            else if(KeyboardState.IsKeyDown(Keys.Escape) && MenuActive == false)
             {
                 MenuActive = true;
             }
@@ -55,7 +63,7 @@ namespace AtpRunner.Scene
 
         public void UpdateMenu()
         {
-            Menu.Update(); // Lots of stuff needed.
+            Menu.Update(KeyboardState);
         }
 
         private void UpdateEntities(GameTime gameTime)

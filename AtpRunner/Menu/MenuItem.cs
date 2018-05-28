@@ -8,16 +8,11 @@ namespace AtpRunner.Menu
 {
     public class MenuItem
     {
-        public int X { get; set; }
-        public int Y { get; set; }
-        public string Text { get; set; }
-        public string SpriteName { get; set; }
+        public string Name;
 
-        public MenuItem(int x, int y, string text)
+        public MenuItem(Menu parentMenu, string name)
         {
-            X = x;
-            Y = y;
-            Text = text;
+            Name = name;
         }
     }
 }

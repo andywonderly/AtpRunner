@@ -49,9 +49,7 @@
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\PlayerEntity.cs" />
     <Compile Include="MainGame.cs" />
-    <Compile Include="Menu\BaseMenu.cs" />
-    <Compile Include="Menu\InGameMenu.cs" />
-    <Compile Include="Menu\MainMenu.cs" />
+    <Compile Include="Menu\Menu.cs" />
     <Compile Include="Menu\MenuItem.cs" />
     <Compile Include="Physics\LevelPhysics.cs" />
     <Compile Include="Physics\MenuPhysics.cs" />

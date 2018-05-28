@@ -1,5 +1,6 @@
 ﻿using AtpRunner.Components;
 using AtpRunner.Entities;
+using AtpRunner.Menu;
 using AtpRunner.Render;
 using AtpRunner.Scene;
 using Microsoft.Xna.Framework;
@@ -98,6 +99,35 @@ namespace AtpRunner.Render
                     
                     SpriteBatch.Draw(texture, frame, Color.White);
                 }
+            }
+
+            SpriteBatch.End();
+        }
+
+        public void DrawMenuItems(List<MenuItem> menuItems, MenuItem selectedItem)
+        {
+            SpriteBatch.Begin();
+
+            var font = _mainGame.Content.Load<SpriteFont>("AptSpriteFont");
+
+            var menuX = 300;
+            var menuY = 300;
+            var increment = 100;
+
+            foreach (MenuItem item in menuItems)
+            {
+                var color = Color.Black;
+                var prefix = "";
+
+                if(item == selectedItem)
+                {
+                    color = Color.Yellow;
+                    prefix = "-> ";
+                }
+
+                SpriteBatch.DrawString(font, prefix + item.Name, new Vector2(menuX, menuY), color);
+
+                menuY += increment;
             }
 
             SpriteBatch.End();

@@ -14,15 +14,15 @@ namespace AtpRunner.Scene
 {
     public class SceneManager : BaseManager
     {
-        private MainGame mainGame;
+        public MainGame MainGame;
         public Scene Scene { get; set; }
         public override string Name { get; set; }
 
 
         public SceneManager(MainGame Game) : base(Game)
         {
-            Scene = new Scene(); // How to re-do this?  Try to avoid New in constructors
-            mainGame = Game;
+            Scene = new Scene(this); // How to re-do this?  Try to avoid New in constructors
+            MainGame = Game;
             Name = "Scene";
             Initialize();
         }
@@ -50,7 +50,7 @@ namespace AtpRunner.Scene
 
         public void LoadLevel1()
         {
-            Scene = new Scene();
+            Scene = new Scene(this);
             var level1 = new Level1Loader(this, Scene);     
                    
         }

@@ -1,5 +1,7 @@
 ﻿using AtpRunner.Components;
 using AtpRunner.Entities;
+using AtpRunner.Menu;
+using AtpRunner.Render;
 using AtpRunner.SceneLoader;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -18,7 +20,6 @@ namespace AtpRunner.Scene
         public Scene Scene { get; set; }
         public override string Name { get; set; }
 
-
         public SceneManager(MainGame Game) : base(Game)
         {
             Scene = new Scene(this); // How to re-do this?  Try to avoid New in constructors
@@ -34,8 +35,7 @@ namespace AtpRunner.Scene
 
         public override void LoadContent()
         {
-            //Add player, obstactles, props to scene
-            LoadLevel1();
+            LoadMainMenu();
         }
 
         public override void UnloadContent()
@@ -48,11 +48,25 @@ namespace AtpRunner.Scene
             Scene.Update(gameTime);
         }
 
+        public void LoadMainMenu()
+        {
+            Scene = new Scene(this);
+            Scene.Menu = new MainMenu(Scene);
+            Scene.MenuActive = true;
+
+            var renderManager = (RenderManager)Scene.SceneManager.MainGame.GetManager("Render");
+            renderManager.LoadContent();
+        }
+
         public void LoadLevel1()
         {
             Scene = new Scene(this);
-            var level1 = new Level1Loader(this, Scene);     
-                   
+            var renderManager = (RenderManager)Scene.SceneManager.MainGame.GetManager("Render");
+            
+            var level1 = new Level1Loader(this, Scene);
+            renderManager.LoadContent();
         }
+
+
     }
 }

@@ -29,3 +29,4 @@ C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Wind
 C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\LevelParser.pdb
 C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Newtonsoft.Json.dll
 C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Newtonsoft.Json.xml
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\AtpSpriteFont.xnb

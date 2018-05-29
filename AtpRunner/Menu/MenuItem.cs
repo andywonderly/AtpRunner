@@ -13,6 +13,7 @@ namespace AtpRunner.Menu
         public MenuItem(Menu parentMenu, string name)
         {
             Name = name;
+            parentMenu.MenuItems.Add(this);
         }
     }
 }

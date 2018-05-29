@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>C:/Users/Andy/Documents/Visual Studio 2015/Projects/AtpRunner/AtpRunner/Content/AtpSpriteFont.spritefont</SourceFile>
+  <SourceTime>2018-05-28T16:50:10.9872143-07:00</SourceTime>
+  <DestFile>C:/Users/Andy/Documents/Visual Studio 2015/Projects/AtpRunner/AtpRunner/Content/bin/Windows/AtpSpriteFont.xnb</DestFile>
+  <DestTime>2018-05-28T16:50:23.1513229-07:00</DestTime>
+  <Importer>FontDescriptionImporter</Importer>
+  <ImporterTime>2016-09-26T11:57:06-07:00</ImporterTime>
+  <Processor>FontDescriptionProcessor</Processor>
+  <ProcessorTime>2016-09-26T11:57:06-07:00</ProcessorTime>
+  <Parameters>
+    <Key>TextureFormat</Key>
+    <Value>Compressed</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

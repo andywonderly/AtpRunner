@@ -15,21 +15,23 @@ namespace AtpRunner.Menu
         public Scene.Scene ParentScene;
         public List<MenuItem> MenuItems;
         public MenuItem SelectedMenuItem;
+        private KeyboardState _previousKeyboardState;
 
         public Menu(Scene.Scene scene)
         {
             ParentScene = scene;
-
+            MenuItems = new List<MenuItem>();
             LoadMenuItems();
             SelectedMenuItem = MenuItems.FirstOrDefault();
+            _previousKeyboardState = Keyboard.GetState();
         }
         public void Update(KeyboardState keyboardState)
         {
-            if(keyboardState.IsKeyDown(Keys.Enter))
+            if (keyboardState.IsKeyDown(Keys.Enter))
             {
                 Activate();
             }
-            else if(keyboardState.IsKeyDown(Keys.Up))
+            else if(keyboardState.IsKeyDown(Keys.Up) && !_previousKeyboardState.IsKeyDown(Keys.Up))
             {
                 var index = MenuItems.IndexOf(SelectedMenuItem);
                 
@@ -42,7 +44,7 @@ namespace AtpRunner.Menu
                     SelectedMenuItem = MenuItems[index - 1];
                 }
             }
-            else if(keyboardState.IsKeyDown(Keys.Down))
+            else if(keyboardState.IsKeyDown(Keys.Down) && !_previousKeyboardState.IsKeyDown(Keys.Down))
             {
                 var index = MenuItems.IndexOf(SelectedMenuItem);
 
@@ -56,7 +58,9 @@ namespace AtpRunner.Menu
                 }
             }
 
-            Draw();
+            _previousKeyboardState = keyboardState;
+
+            //Draw();
         }
 
         public void End()
@@ -64,11 +68,11 @@ namespace AtpRunner.Menu
 
         }
 
-        private void Draw()
-        {
-            var renderManager = (RenderManager)ParentScene.SceneManager.MainGame.GetManager("Render");
-            renderManager.DrawMenuItems(MenuItems, SelectedMenuItem);
-        }
+        //private void Draw()
+        //{
+        //    var renderManager = (RenderManager)ParentScene.SceneManager.MainGame.GetManager("Render");
+        //    renderManager.DrawMenuItems(MenuItems, SelectedMenuItem);
+        //}
 
         public virtual void Activate() { }
         public virtual void LoadMenuItems() { }
@@ -95,7 +99,8 @@ namespace AtpRunner.Menu
             switch (SelectedMenuItem.Name)
             {
                 case "Start":
-                    // Load gameplay scene
+                    ParentScene.SceneManager.LoadLevel1();
+                    ParentScene.MenuActive = false;
                     break;
                 case "Exit":
                     // Exit the program

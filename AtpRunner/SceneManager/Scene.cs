@@ -14,9 +14,10 @@ namespace AtpRunner.Scene
     public class Scene
     {
         public KeyboardState KeyboardState;
+        private KeyboardState _previousKeyboardState;
         protected List<BaseEntity> Entities;
         public Point Camera;
-        bool MenuActive;
+        public bool MenuActive;
         public BasePhysics Physics;
         public Menu.Menu Menu;
         public SceneManager SceneManager;
@@ -27,26 +28,28 @@ namespace AtpRunner.Scene
             Camera = new Point(-40, 180);
             Menu = new MainMenu(this);
             SceneManager = sceneManager;
+            _previousKeyboardState = Keyboard.GetState();
         }
 
         public void Update(GameTime gameTime)
         {
             
             KeyboardState = Keyboard.GetState();
-            Camera.X += 4;
             
-            if(KeyboardState.IsKeyDown(Keys.Escape) && MenuActive == true)
+            
+            if(KeyboardState.IsKeyDown(Keys.Escape) && !_previousKeyboardState.IsKeyDown(Keys.Escape) && MenuActive == true)
             {
                 MenuActive = false;
                 Menu.End();
             }
-            else if(KeyboardState.IsKeyDown(Keys.Escape) && MenuActive == false)
+            else if(KeyboardState.IsKeyDown(Keys.Escape) && !_previousKeyboardState.IsKeyDown(Keys.Escape) && MenuActive == false)
             {
                 MenuActive = true;
             }
 
             if (!MenuActive)
             {
+                Camera.X += 4;
                 UpdateEntities(gameTime);
             }
             else
@@ -55,10 +58,15 @@ namespace AtpRunner.Scene
             }
 
             UpdatePhysics();
+
+            _previousKeyboardState = KeyboardState;
         }
         public void UpdatePhysics()
         {
-            Physics.Update(Entities); // Arguments??
+            if (Physics != null)
+            {
+                Physics.Update(Entities); // Arguments??
+            }
         }
 
         public void UpdateMenu()

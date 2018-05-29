@@ -101,23 +101,31 @@ namespace AtpRunner.Render
                 }
             }
 
+            if(sceneManager.Scene.MenuActive)
+            {
+                var menuItems = sceneManager.Scene.Menu.MenuItems;
+                var selectedItem = sceneManager.Scene.Menu.SelectedMenuItem;
+
+                DrawMenuItems(menuItems, selectedItem);
+            }
+
             SpriteBatch.End();
         }
 
-        public void DrawMenuItems(List<MenuItem> menuItems, MenuItem selectedItem)
+        private void DrawMenuItems(List<MenuItem> menuItems, MenuItem selectedItem)
         {
-            SpriteBatch.Begin();
+            //SpriteBatch.Begin();
 
-            var font = _mainGame.Content.Load<SpriteFont>("AptSpriteFont");
+            var font = _mainGame.Content.Load<SpriteFont>("AtpSpriteFont");            
 
-            var menuX = 300;
-            var menuY = 300;
-            var increment = 100;
+            var menuX = 200;
+            var menuY = 200;
+            var increment = 36;
 
             foreach (MenuItem item in menuItems)
             {
                 var color = Color.Black;
-                var prefix = "";
+                var prefix = "    ";
 
                 if(item == selectedItem)
                 {
@@ -130,7 +138,7 @@ namespace AtpRunner.Render
                 menuY += increment;
             }
 
-            SpriteBatch.End();
+            //SpriteBatch.End();
         }
     }
 }

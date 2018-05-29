@@ -61,6 +61,7 @@ namespace AtpRunner.Scene
         public void LoadLevel1()
         {
             Scene = new Scene(this);
+            Scene.Menu = new InGameMenu(Scene);
             var renderManager = (RenderManager)Scene.SceneManager.MainGame.GetManager("Render");
             
             var level1 = new Level1Loader(this, Scene);

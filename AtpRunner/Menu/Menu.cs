@@ -16,6 +16,7 @@ namespace AtpRunner.Menu
         public List<MenuItem> MenuItems;
         public MenuItem SelectedMenuItem;
         private KeyboardState _previousKeyboardState;
+        private bool _firstLoad;
 
         public Menu(Scene.Scene scene)
         {
@@ -23,11 +24,17 @@ namespace AtpRunner.Menu
             MenuItems = new List<MenuItem>();
             LoadMenuItems();
             SelectedMenuItem = MenuItems.FirstOrDefault();
-            _previousKeyboardState = Keyboard.GetState();
+            _firstLoad = true;
         }
         public void Update(KeyboardState keyboardState)
         {
-            if (keyboardState.IsKeyDown(Keys.Enter))
+            if(_firstLoad)
+            {
+                _previousKeyboardState = keyboardState;
+                _firstLoad = false;
+            }
+
+            if (keyboardState.IsKeyDown(Keys.Enter) && !_previousKeyboardState.IsKeyDown(Keys.Enter))
             {
                 Activate();
             }
@@ -120,7 +127,7 @@ namespace AtpRunner.Menu
             MenuItems.Clear();
 
             var exitToMainMenu = new MenuItem(this, "Exit to Main Menu");
-
+            var restart = new MenuItem(this, "Restart Level");
             SelectedMenuItem = exitToMainMenu;
 
             base.LoadMenuItems();
@@ -128,7 +135,15 @@ namespace AtpRunner.Menu
 
         public override void Activate()
         {
-            // Load main menu scene
+            switch(SelectedMenuItem.Name)
+            {
+                case "Exit to Main Menu":
+                    ParentScene.SceneManager.LoadMainMenu();
+                    break;
+                case "Restart Level":
+                    ParentScene.SceneManager.LoadLevel1();
+                    break;
+            }           
         }
     }
 }

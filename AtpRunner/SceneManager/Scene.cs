@@ -28,14 +28,18 @@ namespace AtpRunner.Scene
             Camera = new Point(-40, 180);
             Menu = new MainMenu(this);
             SceneManager = sceneManager;
-            _previousKeyboardState = Keyboard.GetState();
+            
         }
 
         public void Update(GameTime gameTime)
         {
             
             KeyboardState = Keyboard.GetState();
-            
+
+            if(_previousKeyboardState == null)
+            {
+                _previousKeyboardState = KeyboardState;
+            }
             
             if(KeyboardState.IsKeyDown(Keys.Escape) && !_previousKeyboardState.IsKeyDown(Keys.Escape) && MenuActive == true)
             {

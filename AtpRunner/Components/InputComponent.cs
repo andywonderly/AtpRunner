@@ -108,7 +108,7 @@ namespace AtpRunner.Components
         {
             if(_jumpState == JumpState.CanJump)
             {
-                VelocityY = -14;
+                VelocityY = -15;
                 _jumpState = JumpState.CantJump;
             }  
         }

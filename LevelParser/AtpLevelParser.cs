@@ -12,7 +12,7 @@ namespace LevelParser
     {
         public static TiledData Parse()
         {
-            string json = File.ReadAllText("Level2.json");
+            string json = File.ReadAllText("Level1.json");
             var result = JsonConvert.DeserializeObject<TiledData>(json);
 
             return result;

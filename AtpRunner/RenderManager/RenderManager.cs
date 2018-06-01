@@ -109,6 +109,14 @@ namespace AtpRunner.Render
                 DrawMenuItems(menuItems, selectedItem);
             }
 
+            var player = sceneManager.Scene.GetPlayer();
+            if (player != null)
+            {
+                var playerInput = (InputComponent)player.Components.FirstOrDefault(n => n.Name == "Input");
+                var font = _mainGame.Content.Load<SpriteFont>("AtpSpriteFont");
+                SpriteBatch.DrawString(font, playerInput._jumpState.ToString(), new Vector2(0, 0), Color.White);
+            }
+
             SpriteBatch.End();
         }
 

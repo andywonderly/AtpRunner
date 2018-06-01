@@ -29,6 +29,8 @@ namespace AtpRunner.Physics
             {
                 FreeFall();
             }
+
+            player.PreviousY = player.Y;
         }
 
         private void FreeFall()
@@ -61,7 +63,7 @@ namespace AtpRunner.Physics
 
                     if(movingUp)
                     {
-                        player.Y = platformHitbox.Bottom;
+                        //player.Y = platformHitbox.Bottom;
                          
                         // Send message to end jump and begin descent
                     }
@@ -70,7 +72,7 @@ namespace AtpRunner.Physics
                         // If bottom of player is within a step (one speed unit, or 4 pixels)
                         // then rest on the platform.
 
-                        PlayerTouchedDown();
+                        
 
                         var input = (InputComponent)player.Components.FirstOrDefault(n => n.Name == "Input");
 
@@ -79,6 +81,8 @@ namespace AtpRunner.Physics
                             player.Y = platformHitbox.Top - playerHitbox.Height + 1;
 
                             // And send message to set player state to grounded if need be
+
+                            PlayerTouchedDown();
                         }
                     }
                 }

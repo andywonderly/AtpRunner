@@ -31,7 +31,7 @@ namespace AtpRunner.Components
 
         private ContactState _contactState;
         private ContactState _previousContactState;
-        private JumpState _jumpState;
+        public JumpState _jumpState;
         private JumpState _previousJumpState;
 
         private KeyboardState _previousKeyboardState;

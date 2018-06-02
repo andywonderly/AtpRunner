@@ -59,7 +59,7 @@
     <Compile Include="RenderManager\RenderComponent.cs" />
     <Compile Include="RenderManager\RenderManager.cs" />
     <Compile Include="SceneLoader\BaseSceneLoader.cs" />
-    <Compile Include="SceneLoader\Level1Loader.cs" />
+    <Compile Include="SceneLoader\LevelLoader.cs" />
     <Compile Include="SceneLoader\MainMenuBackground.cs" />
     <Compile Include="SceneManager\Scene.cs" />
     <Compile Include="SceneManager\SceneManager.cs" />

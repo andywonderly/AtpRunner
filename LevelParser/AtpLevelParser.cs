@@ -10,9 +10,9 @@ namespace LevelParser
 {
     public static class AtpLevelParser
     {
-        public static TiledData Parse()
+        public static TiledData Parse(string fileName)
         {
-            string json = File.ReadAllText("Level1.json");
+            string json = File.ReadAllText(fileName);
             var result = JsonConvert.DeserializeObject<TiledData>(json);
 
             return result;

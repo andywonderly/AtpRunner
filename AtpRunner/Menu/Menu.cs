@@ -116,6 +116,27 @@ namespace AtpRunner.Menu
         }
     }
 
+    public class WinMenu : Menu
+    {
+        public WinMenu(Scene.Scene scene) : base(scene)
+        {
+
+        }
+        public override void LoadMenuItems()
+        {
+            MenuItems.Clear();
+
+            var backToMainMenu = new MenuItem(this, "You win! Press enter to continue.");
+
+            SelectedMenuItem = backToMainMenu;
+        }
+
+        public override void Activate()
+        {
+            ParentScene.SceneManager.LoadMainMenu();
+        }
+    }
+
     public class InGameMenu : Menu
     {
         public InGameMenu(Scene.Scene scene) : base(scene)
@@ -126,9 +147,10 @@ namespace AtpRunner.Menu
         {
             MenuItems.Clear();
 
-            var exitToMainMenu = new MenuItem(this, "Exit to Main Menu");
             var restart = new MenuItem(this, "Restart Level");
-            SelectedMenuItem = exitToMainMenu;
+            var exitToMainMenu = new MenuItem(this, "Exit to Main Menu");
+            
+            SelectedMenuItem = restart;
 
             base.LoadMenuItems();
         }
@@ -141,7 +163,7 @@ namespace AtpRunner.Menu
                     ParentScene.SceneManager.LoadMainMenu();
                     break;
                 case "Restart Level":
-                    ParentScene.SceneManager.LoadLevel1();
+                    ParentScene.SceneManager.ReloadLevel();
                     break;
             }           
         }

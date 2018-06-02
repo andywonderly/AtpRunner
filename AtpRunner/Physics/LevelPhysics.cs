@@ -19,6 +19,12 @@ namespace AtpRunner.Physics
         public override void Update(List<BaseEntity> entities)
         {
             BaseEntity player = Scene.GetPlayer();
+
+            if(player.X > 5280)
+            {
+                Scene.SceneManager.LevelComplete();
+            }
+
             List<BaseEntity> obstacles = Scene.GetObstacles();
             List<BaseEntity> platforms = Scene.GetPlatforms();
             

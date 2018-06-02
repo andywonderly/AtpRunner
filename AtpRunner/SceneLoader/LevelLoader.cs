@@ -12,17 +12,19 @@ using static LevelParser.AtpLevelParser;
 
 namespace AtpRunner.SceneLoader
 {
-    class Level1Loader : BaseSceneLoader
+    class LevelLoader : BaseSceneLoader
     {
         public override int PLAYERSTARTX { get; set; }
 
         public override int PLAYERSTARTY { get; set; }
+        public string LevelName { get; set; }
 
-        public Level1Loader(SceneManager sceneManager, AtpRunner.Scene.Scene scene) : base()
+        public LevelLoader(SceneManager sceneManager, AtpRunner.Scene.Scene scene, string levelName) : base()
         {
             PLAYERSTARTX = 0;
             PLAYERSTARTY = 300;
 
+            LevelName = levelName;
             SceneManager = sceneManager;
             Scene = scene;
             Initialize();
@@ -36,7 +38,7 @@ namespace AtpRunner.SceneLoader
 
             //var obstacles = BuildObstacles();
 
-            TiledData level = Parse();
+            TiledData level = Parse(LevelName);
 
             var objectLayer = level.layers.FirstOrDefault(n => n.name == "Object Layer 1");
             var objects = objectLayer.objects;
@@ -143,12 +145,6 @@ namespace AtpRunner.SceneLoader
             obstacles.Add(ground);
             
             return obstacles;
-        }
-
-        private void AddPlayerEventListeners()
-        {
-            var player = Scene.GetPlayer();
-            var inputComponent = (InputComponent)player.Components.FirstOrDefault(n => n.Name == "Input");
         }
 
         public override BasePhysics LoadPhysics()

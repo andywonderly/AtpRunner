@@ -114,7 +114,10 @@ namespace AtpRunner.Render
             {
                 var playerInput = (InputComponent)player.Components.FirstOrDefault(n => n.Name == "Input");
                 var font = _mainGame.Content.Load<SpriteFont>("AtpSpriteFont");
-                SpriteBatch.DrawString(font, playerInput._jumpState.ToString(), new Vector2(0, 0), Color.White);
+
+                // The following two lines are for debuggging purposes.
+                //SpriteBatch.DrawString(font, playerInput._jumpState.ToString(), new Vector2(0, 0), Color.White);
+                SpriteBatch.DrawString(font, sceneManager.Level.ToString(), new Vector2(0, 80), Color.White);
             }
 
             SpriteBatch.End();
@@ -122,8 +125,6 @@ namespace AtpRunner.Render
 
         private void DrawMenuItems(List<MenuItem> menuItems, MenuItem selectedItem)
         {
-            //SpriteBatch.Begin();
-
             var font = _mainGame.Content.Load<SpriteFont>("AtpSpriteFont");            
 
             var menuX = 200;
@@ -145,8 +146,6 @@ namespace AtpRunner.Render
 
                 menuY += increment;
             }
-
-            //SpriteBatch.End();
         }
     }
 }

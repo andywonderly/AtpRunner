@@ -53,7 +53,7 @@ namespace AtpRunner.SceneLoader
             {
                 var obstacleEntity = new BaseEntity(SceneManager, "Obstacle" + i.ToString(), obstacle.x, obstacle.y);
 
-                var renderComponent = new RenderComponent(obstacleEntity, "MaroonDot", obstacle.width, obstacle.height);
+                var renderComponent = new RenderComponent(obstacleEntity, "atpButtHash", obstacle.width, obstacle.height);
                 var physicsComponent = new PhysicsComponent(obstacleEntity, obstacle.width, obstacle.height);
                 
                 Scene.AddEntityToScene(obstacleEntity);
@@ -66,7 +66,7 @@ namespace AtpRunner.SceneLoader
             {
                 var platformEntity = new BaseEntity(SceneManager, "Platform" + i.ToString(), platform.x, platform.y);
 
-                var groundRender = new RenderComponent(platformEntity, "BlackDot", platform.width, platform.height);
+                var groundRender = new RenderComponent(platformEntity, "Platform", platform.width, platform.height);
                 var groundPhysics = new PhysicsComponent(platformEntity, platform.width, platform.height);
 
                 Scene.AddEntityToScene(platformEntity);
@@ -80,7 +80,7 @@ namespace AtpRunner.SceneLoader
                 var doubleJumpEntity = new BaseEntity(SceneManager, "DoubleJump" + i.ToString(), 
                     doubleJump.x, doubleJump.y);
 
-                var renderComponent = new RenderComponent(doubleJumpEntity, "GreenDot", doubleJump.width, doubleJump.height);
+                var renderComponent = new RenderComponent(doubleJumpEntity, "atpSolid", doubleJump.width, doubleJump.height);
                 var physicsComponent = new PhysicsComponent(doubleJumpEntity, doubleJump.width, doubleJump.height);
 
                 Scene.AddEntityToScene(doubleJumpEntity);
@@ -97,7 +97,7 @@ namespace AtpRunner.SceneLoader
         {
             var player = new BaseEntity(SceneManager, "Player", startX, startY);
 
-            var renderComponent = new RenderComponent(player, "RedDot", 32, 32);
+            var renderComponent = new RenderComponent(player, "atpRtsd4", 32, 32);
 
             var inputComponent = new InputComponent(player);
 
@@ -132,7 +132,7 @@ namespace AtpRunner.SceneLoader
 
                 startX += 150;
 
-                var renderComponent = new RenderComponent(obstacle, "GreenDot", 32, 32);
+                var renderComponent = new RenderComponent(obstacle, "atpButtHash", 32, 32);
                 var physicsComponent = new PhysicsComponent(obstacle, 32, 32);
                 obstacles.Add(obstacle);
 

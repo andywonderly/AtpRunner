@@ -30,3 +30,11 @@ C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Wind
 C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Newtonsoft.Json.dll
 C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Newtonsoft.Json.xml
 C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\AtpSpriteFont.xnb
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\Chaiwan.xnb
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\Venice.xnb
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\Sydney.xnb
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\atpButtHash.xnb
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\atpGood.xnb
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\atpRtsd4.xnb
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\atpSolid.xnb
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\Platform.xnb

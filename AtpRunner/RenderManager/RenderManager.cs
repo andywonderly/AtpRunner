@@ -85,6 +85,14 @@ namespace AtpRunner.Render
 
             SpriteBatch.Begin();
 
+            // Draw background
+            if (sceneManager.Scene.Background != null)
+            {
+                var background = sceneManager.Scene.Background;
+                var bgSource = new Rectangle(background.X, 0, 800, 480);
+                SpriteBatch.Draw(background.Texture, new Rectangle(0, 0, 800, 480), bgSource, Color.White);
+            }
+
             foreach (BaseEntity entity in entities)
             {
                 if (entity.Components.Any(n => n.Name == "Render"))
@@ -101,14 +109,7 @@ namespace AtpRunner.Render
                 }
             }
 
-            if(sceneManager.Scene.MenuActive)
-            {
-                var menuItems = sceneManager.Scene.Menu.MenuItems;
-                var selectedItem = sceneManager.Scene.Menu.SelectedMenuItem;
-
-                DrawMenuItems(menuItems, selectedItem);
-            }
-
+            // Draw player
             var player = sceneManager.Scene.GetPlayer();
             if (player != null)
             {
@@ -117,7 +118,15 @@ namespace AtpRunner.Render
 
                 // The following two lines are for debuggging purposes.
                 //SpriteBatch.DrawString(font, playerInput._jumpState.ToString(), new Vector2(0, 0), Color.White);
-                SpriteBatch.DrawString(font, sceneManager.Level.ToString(), new Vector2(0, 80), Color.White);
+                SpriteBatch.DrawString(font, sceneManager.Level.ToString(), new Vector2(512 - camera.X, 64), Color.White);
+            }
+
+            if (sceneManager.Scene.MenuActive)
+            {
+                var menuItems = sceneManager.Scene.Menu.MenuItems;
+                var selectedItem = sceneManager.Scene.Menu.SelectedMenuItem;
+
+                DrawMenuItems(menuItems, selectedItem);
             }
 
             SpriteBatch.End();

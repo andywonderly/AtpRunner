@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AtpRunner.Menu;
+using AtpRunner.Components;
 
 namespace AtpRunner.Scene
 {
@@ -21,6 +22,7 @@ namespace AtpRunner.Scene
         public BasePhysics Physics;
         public Menu.Menu Menu;
         public SceneManager SceneManager;
+        public Background Background;
 
         public Scene(SceneManager sceneManager)
         {
@@ -62,6 +64,10 @@ namespace AtpRunner.Scene
             }
 
             UpdatePhysics();
+            if (Background != null)
+            {
+                Background.Update();
+            }
 
             _previousKeyboardState = KeyboardState;
         }

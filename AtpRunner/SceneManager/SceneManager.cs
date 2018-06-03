@@ -5,6 +5,7 @@ using AtpRunner.Render;
 using AtpRunner.SceneLoader;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -75,6 +76,8 @@ namespace AtpRunner.Scene
             Scene = new Scene(this);
             Scene.Menu = new InGameMenu(Scene);
             var renderManager = (RenderManager)Scene.SceneManager.MainGame.GetManager("Render");
+            var texture = Game.Content.Load<Texture2D>("Venice");
+            Scene.Background = new Background(Scene, texture, 0);
             
             var level1 = new LevelLoader(this, Scene, "Level1.json");
             renderManager.LoadContent();
@@ -86,6 +89,8 @@ namespace AtpRunner.Scene
             Scene = new Scene(this);
             Scene.Menu = new InGameMenu(Scene);
             var renderManager = (RenderManager)Scene.SceneManager.MainGame.GetManager("Render");
+            var texture = Game.Content.Load<Texture2D>("Sydney");
+            Scene.Background = new Background(Scene, texture, 0);
 
             var level1 = new LevelLoader(this, Scene, "Level2.json");
             renderManager.LoadContent();
@@ -97,6 +102,8 @@ namespace AtpRunner.Scene
             Scene = new Scene(this);
             Scene.Menu = new InGameMenu(Scene);
             var renderManager = (RenderManager)Scene.SceneManager.MainGame.GetManager("Render");
+            var texture = Game.Content.Load<Texture2D>("Chaiwan");
+            Scene.Background = new Background(Scene, texture, 0);
 
             var level1 = new LevelLoader(this, Scene, "Level3.json");
             renderManager.LoadContent();

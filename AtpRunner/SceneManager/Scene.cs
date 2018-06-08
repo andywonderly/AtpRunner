@@ -23,6 +23,7 @@ namespace AtpRunner.Scene
         public Menu.Menu Menu;
         public SceneManager SceneManager;
         public Background Background;
+        public bool SceneIsMainMenu;
 
         public Scene(SceneManager sceneManager)
         {
@@ -53,12 +54,13 @@ namespace AtpRunner.Scene
                 MenuActive = true;
             }
 
-            if (!MenuActive)
+            if (!MenuActive || SceneIsMainMenu)
             {
                 Camera.X += 4;
                 UpdateEntities(gameTime);
             }
-            else
+            
+            if(MenuActive || SceneIsMainMenu)
             {
                 UpdateMenu();
             }
@@ -135,7 +137,8 @@ namespace AtpRunner.Scene
 
         public List<BaseEntity> GetObstacles()
         {
-            var obstacles = Entities.Where(n => n.Name.Contains("Obstacle") || n.Name.Contains("DoubleJump")).ToList();
+            var obstacles = Entities.Where(n => n.Name.Contains("Obstacle") || 
+                n.Name.Contains("DoubleJump") || n.Name.Contains("AutoJump")).ToList();
 
             return obstacles;
         }

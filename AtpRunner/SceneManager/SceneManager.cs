@@ -65,6 +65,8 @@ namespace AtpRunner.Scene
             Scene = new Scene(this);
             Scene.Menu = new MainMenu(Scene);
             Scene.MenuActive = true;
+            Scene.SceneIsMainMenu = true;
+            var menuMenuLevel = new MainMenuLevelLoader(this, Scene, "MainMenu");
 
             var renderManager = (RenderManager)Scene.SceneManager.MainGame.GetManager("Render");
             renderManager.LoadContent();
@@ -78,6 +80,7 @@ namespace AtpRunner.Scene
             var renderManager = (RenderManager)Scene.SceneManager.MainGame.GetManager("Render");
             var texture = Game.Content.Load<Texture2D>("Venice");
             Scene.Background = new Background(Scene, texture, 0);
+            Scene.SceneIsMainMenu = false;
             
             var level1 = new LevelLoader(this, Scene, "Level1.json");
             renderManager.LoadContent();
@@ -91,6 +94,7 @@ namespace AtpRunner.Scene
             var renderManager = (RenderManager)Scene.SceneManager.MainGame.GetManager("Render");
             var texture = Game.Content.Load<Texture2D>("Sydney");
             Scene.Background = new Background(Scene, texture, 0);
+            Scene.SceneIsMainMenu = false;
 
             var level1 = new LevelLoader(this, Scene, "Level2.json");
             renderManager.LoadContent();
@@ -104,6 +108,7 @@ namespace AtpRunner.Scene
             var renderManager = (RenderManager)Scene.SceneManager.MainGame.GetManager("Render");
             var texture = Game.Content.Load<Texture2D>("Chaiwan");
             Scene.Background = new Background(Scene, texture, 0);
+            Scene.SceneIsMainMenu = false;
 
             var level1 = new LevelLoader(this, Scene, "Level3.json");
             renderManager.LoadContent();
@@ -116,6 +121,7 @@ namespace AtpRunner.Scene
             Scene = new Scene(this);
             Scene.Menu = new WinMenu(Scene);
             Scene.MenuActive = true;
+            Scene.SceneIsMainMenu = false;
 
             var renderManager = (RenderManager)Scene.SceneManager.MainGame.GetManager("Render");
             renderManager.LoadContent();

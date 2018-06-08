@@ -104,6 +104,10 @@ namespace AtpRunner.Components
             
         }
 
+        public void AutoJump()
+        {
+            Jump();
+        }
         private void Jump()
         {
             if(_jumpState == JumpState.CanJump)

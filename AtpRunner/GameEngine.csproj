@@ -52,6 +52,7 @@
     <Compile Include="MainGame.cs" />
     <Compile Include="Menu\Menu.cs" />
     <Compile Include="Menu\MenuItem.cs" />
+    <Compile Include="Physics\MainMenuLevelPhysics.cs" />
     <Compile Include="Physics\LevelPhysics.cs" />
     <Compile Include="Physics\MenuPhysics.cs" />
     <Compile Include="Physics\BasePhysics.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="RenderManager\RenderComponent.cs" />
     <Compile Include="RenderManager\RenderManager.cs" />
     <Compile Include="SceneLoader\BaseSceneLoader.cs" />
+    <Compile Include="SceneLoader\MainMenuLevelLoader.cs" />
     <Compile Include="SceneLoader\LevelLoader.cs" />
     <Compile Include="SceneLoader\MainMenuBackground.cs" />
     <Compile Include="SceneManager\Scene.cs" />

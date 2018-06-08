@@ -95,7 +95,18 @@ namespace AtpRunner.Render
 
             foreach (BaseEntity entity in entities)
             {
-                if (entity.Components.Any(n => n.Name == "Render"))
+                if(entity.Name == "WinGuy")
+                {
+                    RenderComponent component = (RenderComponent)entity.Components.FirstOrDefault(n => n.Name == "Render");
+                    Texture2D texture = _sceneTextures.FirstOrDefault(n => n.Name == component.TextureName);
+
+                    Rectangle frame = new Rectangle(entity.X, (int)entity.Y,
+                        component.Dimensions.X, component.Dimensions.Y);
+
+                    SpriteBatch.Draw(texture, frame, Color.White);
+
+                }
+                else if (entity.Components.Any(n => n.Name == "Render"))
                 {
                     RenderComponent component = (RenderComponent)entity.Components.FirstOrDefault(n => n.Name == "Render");
                     Texture2D texture = _sceneTextures.FirstOrDefault(n => n.Name == component.TextureName);
@@ -107,18 +118,22 @@ namespace AtpRunner.Render
                     
                     SpriteBatch.Draw(texture, frame, Color.White);
                 }
+
+
             }
 
             // Draw player
             var player = sceneManager.Scene.GetPlayer();
             if (player != null)
             {
-                var playerInput = (InputComponent)player.Components.FirstOrDefault(n => n.Name == "Input");
                 var font = _mainGame.Content.Load<SpriteFont>("AtpSpriteFont");
 
                 // The following two lines are for debuggging purposes.
                 //SpriteBatch.DrawString(font, playerInput._jumpState.ToString(), new Vector2(0, 0), Color.White);
-                SpriteBatch.DrawString(font, sceneManager.Level.ToString(), new Vector2(512 - camera.X, 64), Color.White);
+                if (sceneManager.Level.ToString() != "MainMenu")
+                {
+                    SpriteBatch.DrawString(font, sceneManager.Level.ToString(), new Vector2(512 - camera.X, 64), Color.White);
+                }
             }
 
             if (sceneManager.Scene.MenuActive)
@@ -134,11 +149,20 @@ namespace AtpRunner.Render
 
         private void DrawMenuItems(List<MenuItem> menuItems, MenuItem selectedItem)
         {
-            var font = _mainGame.Content.Load<SpriteFont>("AtpSpriteFont");            
+            var font = _mainGame.Content.Load<SpriteFont>("AtpSpriteFont");
+            SceneManager sceneManager = (SceneManager)_mainGame.GetManager("Scene");
 
             var menuX = 200;
             var menuY = 200;
             var increment = 36;
+
+            if (sceneManager.Level.ToString() == "MainMenu")
+            {
+                menuX = 16;
+                menuY = 370;
+            }
+
+            
 
             foreach (MenuItem item in menuItems)
             {

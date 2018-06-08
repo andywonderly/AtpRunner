@@ -1,5 +1,6 @@
 ﻿using AtpRunner.Components;
 using AtpRunner.Entities;
+using AtpRunner.Render;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -20,10 +21,14 @@ namespace AtpRunner.Physics
         {
             BaseEntity player = Scene.GetPlayer();
 
-            if(player.X > 800)
+            if(player.X > 1800)
             {
                 Scene.Camera = new Point(-40, 180);
                 player.X = 0;
+
+                var doubleJump = GetDoubleJump();
+
+                Scene.AddEntityToScene(doubleJump);
             }
 
             List<BaseEntity> obstacles = Scene.GetObstacles();
@@ -40,10 +45,19 @@ namespace AtpRunner.Physics
             player.PreviousY = player.Y;
         }
 
+        private BaseEntity GetDoubleJump()
+        {
+            var doubleJump1 = new BaseEntity(Scene.SceneManager, "DoubleJump1", 1660, 480 - 80 - 64);
+            var doubleJump1render = new RenderComponent(doubleJump1, "atpSolid", 32, 32);
+            var doubleJump1physics = new PhysicsComponent(doubleJump1, 32, 32);
+
+            return doubleJump1;
+        }
+
         private void FreeFall()
         {
             BaseEntity player = Scene.GetPlayer();
-            InputComponent input = (InputComponent)player.Components.FirstOrDefault(n => n.Name == "Input");
+            var input = GetInput();
 
             input.FreeFall();
         }
@@ -81,9 +95,9 @@ namespace AtpRunner.Physics
 
                         
 
-                        var input = (InputComponent)player.Components.FirstOrDefault(n => n.Name == "Input");
+                        var input = GetInput();
 
-                        if(playerHitbox.Bottom - platformHitbox.Bottom < input.VelocityY + 1)
+                        if (playerHitbox.Bottom - platformHitbox.Bottom < input.VelocityY + 1)
                         {
                             player.Y = platformHitbox.Top - playerHitbox.Height + 1;
 
@@ -104,7 +118,7 @@ namespace AtpRunner.Physics
 
             var playerPhysics = (PhysicsComponent)player.Components.FirstOrDefault(n => n.Name == "Physics");
             var playerHitbox = new Rectangle(player.X, (int)player.Y, playerPhysics.Hitbox.X, playerPhysics.Hitbox.Y);
-            var playerInput = (InputComponent)player.Components.FirstOrDefault(n => n.Name == "Input");
+            var playerInput = GetInput();
 
             bool movingDown = player.PreviousY < player.Y;
             bool movingUp = player.PreviousY > player.Y;
@@ -123,6 +137,12 @@ namespace AtpRunner.Physics
                     {
                         playerInput.AutoJump();
                     }
+
+                    if(obstacle.Name.Contains("DoubleJump"))
+                    {
+                        playerInput.DoubleJump();
+                        Scene.RemoveEntityFromScene(obstacle);
+                    }
                 }
             }
 
@@ -132,7 +152,7 @@ namespace AtpRunner.Physics
         private void PlayerTouchedDown()
         {
             BaseEntity player = Scene.GetPlayer();
-            InputComponent input = (InputComponent)player.Components.FirstOrDefault(n => n.Name == "Input");
+            var input = GetInput();
 
             input.TouchedGround();
         }
@@ -140,9 +160,17 @@ namespace AtpRunner.Physics
         private void DoubleJump()
         {
             BaseEntity player = Scene.GetPlayer();
-            InputComponent input = (InputComponent)player.Components.FirstOrDefault(n => n.Name == "Input");
+            var input = GetInput();
 
             input.DoubleJump();
+        }
+
+        private MainMenuInputComponent GetInput()
+        {
+            BaseEntity player = Scene.GetPlayer();
+            MainMenuInputComponent input = (MainMenuInputComponent)player.Components.FirstOrDefault(n => n.Name == "Input");
+
+            return input;
         }
 
 

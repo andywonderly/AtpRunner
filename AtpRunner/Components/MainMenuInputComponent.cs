@@ -9,19 +9,7 @@ using Microsoft.Xna.Framework;
 
 namespace AtpRunner.Components
 {
-    public enum ContactState
-    {
-        Grounded,
-        Airborne,
-    }
-
-    public enum JumpState
-    {
-        CanJump,
-        CantJump,
-    }
-
-    public class InputComponent : BaseComponent
+    public class MainMenuInputComponent : BaseComponent
     {
         private BaseEntity _parentEntity;
         private int _speed;
@@ -34,26 +22,19 @@ namespace AtpRunner.Components
         public JumpState _jumpState;
         private JumpState _previousJumpState;
 
-        private KeyboardState _previousKeyboardState;
-
         private int _jumpCounter;
         private int _maxJump;
         private int _minJump;
 
-        public InputComponent(BaseEntity parentEntity) : base(parentEntity)
+        public MainMenuInputComponent(BaseEntity parentEntity) : base(parentEntity)
         {
             _parentEntity = parentEntity;
             Name = "Input";
             _speed = 4;
             _gravity = 1;
-
             _velocityYMax = 8;
-
             _contactState = ContactState.Airborne;
             _previousContactState = ContactState.Airborne;
-
-            _previousKeyboardState = Keyboard.GetState();
-
             _jumpCounter = 0;
             _maxJump = 10;
             _minJump = 7;
@@ -73,17 +54,7 @@ namespace AtpRunner.Components
 
         public override void Update(GameTime gameTime)
         {
-            
-            KeyboardState keyboardState = _parentEntity.Manager.Scene.KeyboardState;
-            _previousContactState = _contactState;
-
-            if(!(_previousKeyboardState.IsKeyDown(Keys.Up) || _previousKeyboardState.IsKeyDown(Keys.Space) || 
-                _previousKeyboardState.IsKeyDown(Keys.W)) && (
-                keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.Space) || keyboardState.IsKeyDown(Keys.W)))
-            {
-                Jump();
-            }
-            
+            _previousContactState = _contactState; 
             _parentEntity.PreviousX = _parentEntity.X;
             _parentEntity.X += _speed;
             _parentEntity.Y += VelocityY;
@@ -95,7 +66,7 @@ namespace AtpRunner.Components
                 VelocityY = _velocityYMax;
             }
 
-            _previousKeyboardState = keyboardState;
+
         }
 
         public void DoubleJump()
@@ -104,6 +75,10 @@ namespace AtpRunner.Components
             
         }
 
+        public void AutoJump()
+        {
+            Jump();
+        }
         private void Jump()
         {
             if(_jumpState == JumpState.CanJump)

@@ -23,7 +23,7 @@ namespace AtpRunner.Scene
         public Menu.Menu Menu;
         public SceneManager SceneManager;
         public Background Background;
-        public bool SceneIsMainMenu;
+        public bool SceneIsMenu;
 
         public Scene(SceneManager sceneManager)
         {
@@ -54,13 +54,13 @@ namespace AtpRunner.Scene
                 MenuActive = true;
             }
 
-            if (!MenuActive || SceneIsMainMenu)
+            if (!MenuActive || SceneIsMenu)
             {
                 Camera.X += 4;
                 UpdateEntities(gameTime);
             }
             
-            if(MenuActive || SceneIsMainMenu)
+            if(MenuActive || SceneIsMenu)
             {
                 UpdateMenu();
             }
@@ -130,7 +130,9 @@ namespace AtpRunner.Scene
 
         public List<BaseEntity> GetEntitiesWithSprites()
         {
-            var entities = Entities.Where(n => n.Components.Any(c => c.Name == "Render")).ToList();
+            var entities = Entities.Where(n => n.Components.Any(c => c.Name == "Render" || c.Name == "WinGuyRender")).ToList();
+
+            
 
             return entities;
         }

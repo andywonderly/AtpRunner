@@ -50,7 +50,7 @@ namespace AtpRunner.SceneLoader
 
             var renderComponent = new RenderComponent(player, "atpRtsd4", 32, 32);
 
-            var inputComponent = new InputComponent(player);
+            var inputComponent = new MainMenuInputComponent(player);
 
             var physicsComponent = new PhysicsComponent(player, 32, 32);
 
@@ -59,29 +59,61 @@ namespace AtpRunner.SceneLoader
 
         public void LoadEntities()
         {
-            var platformEntity = new BaseEntity(SceneManager, "Platform1", 0, 480);
+            for(var i = -6; i < 100; i++)
+            {
+                var platformEntity = new BaseEntity(SceneManager, "Platform" + i.ToString(), i * 32, 480);
+                var platformRender = new RenderComponent(platformEntity, "Platform", 32, 32);
+                var platformPhysics = new PhysicsComponent(platformEntity, 32, 32);
 
-            var groundRender = new RenderComponent(platformEntity, "Platform", 1000, 32);
-            var groundPhysics = new PhysicsComponent(platformEntity, 1000, 32);
+                Scene.AddEntityToScene(platformEntity);
+            }
 
-            Scene.AddEntityToScene(platformEntity);
+            
 
-            var obstacle1 = new BaseEntity(SceneManager, "Obstacle1", 320, 480 - 32);
+            var obstacle1 = new BaseEntity(SceneManager, "Obstacle1", 1080, 480 - 32);
             var obstacle1render = new RenderComponent(obstacle1, "atpButtHash", 32, 32);
             var obstacle1physics = new PhysicsComponent(obstacle1, 32, 32);
 
             Scene.AddEntityToScene(obstacle1);
 
-            var obstacle2 = new BaseEntity(SceneManager, "Obstacle2", 320, 480 - 64);
+            var obstacle2 = new BaseEntity(SceneManager, "Obstacle2", 1080, 480 - 64);
             var obstacle2render = new RenderComponent(obstacle2, "atpButtHash", 32, 32);
             var obstacle2physics = new PhysicsComponent(obstacle2, 32, 32);
 
             Scene.AddEntityToScene(obstacle2);
 
-            var autoJump1 = new BaseEntity(SceneManager, "AutoJump1", 264, 480 - 32);
+            var autoJump1 = new BaseEntity(SceneManager, "AutoJump1", 1032, 480 - 32);
             var autoJump1physics = new PhysicsComponent(autoJump1, 32, 32);
 
             Scene.AddEntityToScene(autoJump1);
+
+            for (var i = 0; i < 6; i++)
+            {
+                var obstacle = new BaseEntity(SceneManager, "Obstacle" + (i + 3).ToString(), 1700, 480 - 32 * i);
+                var obstacleRender = new RenderComponent(obstacle, "atpButtHash", 32, 32);
+                var obstaclePhysics = new PhysicsComponent(obstacle, 32, 32);
+
+                Scene.AddEntityToScene(obstacle);
+            }
+
+            var autoJump2 = new BaseEntity(SceneManager, "AutoJump2", 1604, 480 - 32);
+            //var autoJump2render = new RenderComponent(autoJump2, "atpGood", 32, 32);
+            var autoJump2physics = new PhysicsComponent(autoJump2, 32, 32);
+
+            Scene.AddEntityToScene(autoJump2);
+
+            var autoJump3 = new BaseEntity(SceneManager, "AutoJump3", 1670, 480 - 115);
+            //var autoJump3render = new RenderComponent(autoJump3, "atpGood", 32, 32);
+            var autoJump3physics = new PhysicsComponent(autoJump3, 32, 32);
+
+            Scene.AddEntityToScene(autoJump3);
+
+            var doubleJump1 = new BaseEntity(SceneManager, "DoubleJump1", 1660, 480 - 80 - 64);
+            var doubleJump1render = new RenderComponent(doubleJump1, "atpSolid", 32, 32);
+            var doubleJump1physics = new PhysicsComponent(doubleJump1, 32, 32);
+
+            Scene.AddEntityToScene(doubleJump1);
+
         }
 
         public override List<BaseEntity> BuildObstacles()

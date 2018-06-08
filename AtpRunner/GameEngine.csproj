@@ -44,6 +44,8 @@
     <Compile Include="BaseManager.cs" />
     <Compile Include="Components\Background.cs" />
     <Compile Include="Components\BaseComponent.cs" />
+    <Compile Include="Components\WinGuyInputComponent.cs" />
+    <Compile Include="Components\MainMenuInputComponent.cs" />
     <Compile Include="Components\InputComponent.cs" />
     <Compile Include="Components\PhysicsComponent.cs" />
     <Compile Include="Components\PlayerPhysicsComponent.cs" />

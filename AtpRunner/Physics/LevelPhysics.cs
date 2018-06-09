@@ -37,6 +37,11 @@ namespace AtpRunner.Physics
             }
 
             player.PreviousY = player.Y;
+
+            if(player.Y > 1200)
+            {
+                Scene.SceneManager.ReloadLevel();
+            }
         }
 
         private void FreeFall()
@@ -120,6 +125,11 @@ namespace AtpRunner.Physics
                     if(obstacle.Name.Contains("DoubleJump"))
                     {
                         DoubleJump();
+                    }
+
+                    if(obstacle.Name.Contains("Obstacle"))
+                    {
+                        Scene.SceneManager.ReloadLevel();
                     }
 
                     // Removing the entity is a simple way to get rid of it.  I may want to change its color

@@ -158,8 +158,8 @@ namespace AtpRunner.Render
 
             if (sceneManager.Level.ToString() == "MainMenu")
             {
-                menuX = 16;
-                menuY = 370;
+                menuX = 316;
+                menuY = 16;
             }
 
             

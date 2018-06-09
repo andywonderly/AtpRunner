@@ -67,7 +67,8 @@ namespace AtpRunner.Scene
             Scene.MenuActive = true;
             Scene.SceneIsMenu = true;
             var menuMenuLevel = new MainMenuLevelLoader(this, Scene, "MainMenu");
-
+            var texture = Game.Content.Load<Texture2D>("Tekken5Stage");
+            Scene.Background = new Background(Scene, texture, 0);
             var renderManager = (RenderManager)Scene.SceneManager.MainGame.GetManager("Render");
             renderManager.LoadContent();
         }
@@ -128,6 +129,9 @@ namespace AtpRunner.Scene
             var winGuyInput = new WinGuyInputComponent(winGuy);
 
             Scene.AddEntityToScene(winGuy);
+
+            var texture = Game.Content.Load<Texture2D>("ResidentEvilWin");
+            Scene.Background = new Background(Scene, texture, 0);
 
             var renderManager = (RenderManager)Scene.SceneManager.MainGame.GetManager("Render");
             renderManager.LoadContent();

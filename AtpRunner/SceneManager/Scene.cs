@@ -44,12 +44,12 @@ namespace AtpRunner.Scene
                 _previousKeyboardState = KeyboardState;
             }
             
-            if(KeyboardState.IsKeyDown(Keys.Escape) && !_previousKeyboardState.IsKeyDown(Keys.Escape) && MenuActive == true)
+            if(KeyboardState.IsKeyDown(Keys.Escape) && !_previousKeyboardState.IsKeyDown(Keys.Escape) && MenuActive == true && !SceneIsMenu)
             {
                 MenuActive = false;
                 Menu.End();
             }
-            else if(KeyboardState.IsKeyDown(Keys.Escape) && !_previousKeyboardState.IsKeyDown(Keys.Escape) && MenuActive == false)
+            else if(KeyboardState.IsKeyDown(Keys.Escape) && !_previousKeyboardState.IsKeyDown(Keys.Escape) && MenuActive == false && !SceneIsMenu)
             {
                 MenuActive = true;
             }

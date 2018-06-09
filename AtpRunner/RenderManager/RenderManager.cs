@@ -160,6 +160,8 @@ namespace AtpRunner.Render
             {
                 menuX = 316;
                 menuY = 16;
+
+                SpriteBatch.DrawString(font, "AtpRunner by Andy Wonderly", new Vector2(200, 400), Color.Blue);
             }
 
             

@@ -110,7 +110,7 @@ namespace AtpRunner.Menu
                     ParentScene.MenuActive = false;
                     break;
                 case "Exit":
-                    // Exit the program
+                    ParentScene.SceneManager.MainGame.Exit();
                     break;
             }
         }

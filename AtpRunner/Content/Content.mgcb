@@ -184,3 +184,51 @@
 /processorParam:TextureFormat=Color
 /build:ResidentEvilWin.png
 
+#begin ButtHash.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:ButtHash.wav
+
+#begin Rise01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Rise01.wav
+
+#begin Rise02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Rise02.wav
+
+#begin Rise03.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Rise03.wav
+
+#begin Bagoosh.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Bagoosh.wav
+
+#begin ComeOnMan.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:ComeOnMan.wav
+
+#begin Trumpet.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Trumpet.wav
+
+#begin Upper01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Upper01.wav
+

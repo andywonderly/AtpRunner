@@ -41,3 +41,11 @@ C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Wind
 C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\TekkenStage.xnb
 C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\Tekken5Stage.xnb
 C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\ResidentEvilWin.xnb
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\ButtHash.xnb
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\Rise01.xnb
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\Rise02.xnb
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\Rise03.xnb
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\Bagoosh.xnb
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\ComeOnMan.xnb
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\Trumpet.xnb
+C:\Users\Andy\Documents\Visual Studio 2015\Projects\AtpRunner\AtpRunner\bin\Windows\x86\Debug\Content\Upper01.xnb

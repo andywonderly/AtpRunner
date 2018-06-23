@@ -1,5 +1,6 @@
 ﻿using AtpRunner.Render;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -107,6 +108,8 @@ namespace AtpRunner.Menu
             {
                 case "Start":
                     ParentScene.SceneManager.LoadLevel1();
+                    var upper = ParentScene.SceneManager.MainGame.Content.Load<SoundEffect>("Upper01");
+                    upper.Play();
                     ParentScene.MenuActive = false;
                     break;
                 case "Exit":

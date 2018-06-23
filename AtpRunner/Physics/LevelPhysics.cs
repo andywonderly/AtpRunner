@@ -1,6 +1,8 @@
 ﻿using AtpRunner.Components;
 using AtpRunner.Entities;
+using AtpRunner.Scene;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +13,11 @@ namespace AtpRunner.Physics
 {
     public class LevelPhysics : BasePhysics
     {
+        private JumpSoundEffectPlayer JumpSound;
         public LevelPhysics(Scene.Scene scene) : base(scene)
         {
             Scene = scene;
+            JumpSound = new JumpSoundEffectPlayer(scene);
         }
 
         public override void Update(List<BaseEntity> entities)
@@ -41,7 +45,11 @@ namespace AtpRunner.Physics
             if(player.Y > 1200)
             {
                 Scene.SceneManager.ReloadLevel();
+                var comeOn = Scene.SceneManager.MainGame.Content.Load<SoundEffect>("ComeOnMan");
+                comeOn.Play();
             }
+
+            JumpSound.Update();
         }
 
         private void FreeFall()
@@ -125,10 +133,13 @@ namespace AtpRunner.Physics
                     if(obstacle.Name.Contains("DoubleJump"))
                     {
                         DoubleJump();
+                        JumpSound.Play();
                     }
 
                     if(obstacle.Name.Contains("Obstacle"))
                     {
+                        var buttHash = Scene.SceneManager.MainGame.Content.Load<SoundEffect>("ButtHash");
+                        buttHash.Play();
                         Scene.SceneManager.ReloadLevel();
                     }
 
@@ -166,4 +177,68 @@ namespace AtpRunner.Physics
 
 
     }
+}
+
+public class JumpSoundEffectPlayer
+{
+    private SoundEffect Rise01;
+    private SoundEffect Rise02;
+    private SoundEffect Rise03;
+
+    private bool play1;
+    private bool play2;
+    private bool play3;
+
+    private int counter;
+
+    public JumpSoundEffectPlayer(Scene scene)
+    {
+        Rise01 = scene.SceneManager.MainGame.Content.Load<SoundEffect>("Rise01");
+        Rise02 = scene.SceneManager.MainGame.Content.Load<SoundEffect>("Rise02");
+        Rise03 = scene.SceneManager.MainGame.Content.Load<SoundEffect>("Rise03");
+
+        play1 = false;
+        play2 = false;
+
+        counter = 0;
+    }
+
+    public void Update()
+    {
+        if(play1 || play2 || play3)
+        {
+            counter++;
+
+            if(counter > 60)
+            {
+                play1 = false;
+                play2 = false;
+                play3 = false;
+
+                counter = 0;
+            }
+        }
+    }
+
+    public void Play()
+    {
+        if (!play1 && !play2)
+        {
+            Rise01.Play();
+            play1 = true;
+            counter = 0;
+        }
+        else if (play1 && !play2)
+        {
+            Rise02.Play();
+            play2 = true;
+            counter = 0;
+        }
+        else if(play1 && play2)
+        {
+            Rise03.Play();
+            counter = 0;
+        }
+    }
+
 }

@@ -4,6 +4,7 @@ using AtpRunner.Menu;
 using AtpRunner.Render;
 using AtpRunner.SceneLoader;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -160,8 +161,18 @@ namespace AtpRunner.Scene
             // having the camera slow down or stop and the player riding out of camera
             // view.
 
+            if(Level == LevelState.Level3)
+            {
+                var trumpet = MainGame.Content.Load<SoundEffect>("Trumpet");
+                trumpet.Play();
+            }
+            else
+            {
+                var bagoosh = MainGame.Content.Load<SoundEffect>("Bagoosh");
+                bagoosh.Play();
+            }
             
-
+            
 
             LoadNextLevel();
         }

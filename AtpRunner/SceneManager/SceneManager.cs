@@ -47,7 +47,7 @@ namespace AtpRunner.Scene
 
         public override void LoadContent()
         {
-            LoadLevel3();
+            LoadMainMenu();
         }
 
         public override void UnloadContent()
